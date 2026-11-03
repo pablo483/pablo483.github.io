@@ -119,10 +119,10 @@
 
   // 8. Hero Typewriter Cycling Effect
   const phrases = [
+    "reliable backend systems.",
     "Spring Boot REST APIs.",
     "multi-tenant SaaS backends.",
-    "Redis caching & rate limiters.",
-    "event-driven Kafka pipelines."
+    "Redis caching & Kafka pipelines."
   ];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

@@ -119,13 +119,13 @@
 
           <h1 class="hero-title">
             Hi, I'm <span class="gradient-text">Sudarshan GC</span>.<br />
-            I engineer <span class="typing-wrap"><span id="typing-role">Spring Boot REST APIs.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
+            I build <span class="typing-wrap"><span id="typing-role">reliable backend systems.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
           </h1>
 
           <p class="hero-subtitle">
-            Software Engineer with <strong>1 year of professional experience</strong> building production Java &amp; Spring Boot backends —
-            specializing in multi-tenant SaaS isolation, authentication security, Redis caching, and event-driven Apache Kafka pipelines.
-            Currently deepening my skills in <strong>AWS</strong> and <strong>Distributed System Design</strong>.
+            Backend Software Engineer with <strong>1 year of professional experience</strong> building reliable services with Java &amp; Spring Boot.
+            I focus on designing clean REST APIs, secure authentication, caching with Redis, and event-driven messaging with Kafka.
+            Currently deepening my focus on <strong>Distributed Systems</strong> and <strong>AWS Cloud</strong>.
           </p>
 
           <div class="hero-cta">
@@ -175,7 +175,7 @@
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <span class="terminal-title">spring-boot-pipeline — bash</span>
+            <span class="terminal-title">backend-request-trace.log</span>
           </div>
 
           <div class="terminal-tabs" role="tablist" aria-label="Select sample API pipeline">
@@ -209,7 +209,7 @@
           </div>
 
           <div class="terminal-footer">
-            <span>Click tabs above to inspect real project flows</span>
+            <span>Select an endpoint above to trace request execution</span>
             <span class="live-indicator"><span class="live-ping"></span>Java 17 • Spring 3.5</span>
           </div>
         </aside>
@@ -220,8 +220,8 @@
     <section id="skills" class="section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-eyebrow">01 / CAPABILITIES</p>
-          <h2 class="section-title">Technical Stack</h2>
+          <p class="section-eyebrow">01 / TECHNICAL SKILLS</p>
+          <h2 class="section-title">What I Work With</h2>
         </div>
 
         <div class="skills-grid">
@@ -274,7 +274,7 @@
           <div class="skill-card spotlight-card reveal" style="--delay: 210ms">
             <div class="skill-card-head">
               <span class="skill-icon" aria-hidden="true">OPS</span>
-              <h3>Reliability &amp; Learning</h3>
+              <h3>Testing &amp; Reliability</h3>
             </div>
             <ul class="tag-list">
               <li>Bucket4j Rate Limiting</li>
@@ -282,7 +282,7 @@
               <li>Prometheus Metrics</li>
               <li>Grafana k6 Load Tests</li>
               <li>JUnit 5 &amp; Mockito</li>
-              <li class="tag-highlight">Learning: System Design &amp; AWS</li>
+              <li class="tag-highlight">Focus: Distributed Systems &amp; AWS</li>
             </ul>
           </div>
         </div>
@@ -294,8 +294,8 @@
       <div class="container">
         <div class="section-header section-header-row reveal">
           <div>
-            <p class="section-eyebrow">02 / SHIPPED CODE</p>
-            <h2 class="section-title">Featured Backend Projects</h2>
+            <p class="section-eyebrow">02 / FEATURED PROJECTS</p>
+            <h2 class="section-title">Projects I've Built</h2>
           </div>
 
           <div class="filter-bar" role="group" aria-label="Filter projects by category">
@@ -327,14 +327,14 @@
                 </a>
               </h3>
               <p class="project-desc">
-                Production-style multi-tenant SaaS platform isolating organizations, inventory transactions,
-                supplier workflows, and subscription plans behind a horizontally scaled Spring Boot backend and React/TypeScript UI.
+                A multi-tenant inventory platform designed for complete data isolation between organizations.
+                Handles product catalogs, supplier workflows, stock transactions, and subscription plans with a scalable Spring Boot backend.
               </p>
 
               <ul class="project-highlights">
-                <li>Enforces tenant context isolation via custom <code>TenantInterceptor</code>, Flyway SQL migrations, and tuned HikariCP pools.</li>
-                <li>Implements Redis caching, Pub/Sub inventory events, sorted-set leaderboards, and Bucket4j API rate limiting.</li>
-                <li>Containerized with <code>docker-compose.prod.yml</code> load-balancing Nginx across 3 Spring Boot instances, plus Prometheus metrics and Grafana k6 load scripts.</li>
+                <li>Enforces strict tenant isolation using a custom <code>TenantInterceptor</code>, Flyway schema migrations, and tuned HikariCP connection pools.</li>
+                <li>Accelerates read-heavy inventory queries with Redis caching, publishes Pub/Sub stock alerts, and protects endpoints with Bucket4j rate limiting.</li>
+                <li>Production setup with Docker Compose and Nginx load-balancing across 3 Spring Boot instances, benchmarked using Grafana k6 load tests.</li>
               </ul>
             </div>
 
@@ -384,14 +384,14 @@
                 </a>
               </h3>
               <p class="project-desc">
-                Role-based e-commerce API supporting <code>ADMIN</code>, <code>VENDOR</code>, and <code>USER</code> workflows
-                with cloud media storage, Redis caching, and scheduled inventory alerting.
+                A modular e-commerce REST API designed around role-based workflows for customers, vendors, and administrators,
+                featuring cloud media uploads, Redis caching, and automated inventory notifications.
               </p>
 
               <ul class="project-highlights">
-                <li>Handles multipart product creation with Cloudinary image uploads and paginated keyword/price/category search.</li>
-                <li>Includes an admin moderation pipeline to approve or reject pending vendor listings.</li>
-                <li>Runs a daily <code>@Scheduled</code> cron job to detect low-stock products and email vendors automatically via SMTP.</li>
+                <li>Supports multipart product listings with Cloudinary media storage and fast paginated search across categories, keywords, and prices.</li>
+                <li>Includes a moderation workflow allowing administrators to review, approve, or reject vendor listings before they go live.</li>
+                <li>Automates inventory monitoring with a daily <code>@Scheduled</code> task that identifies low-stock items and emails vendors via SMTP.</li>
               </ul>
             </div>
 
@@ -431,14 +431,14 @@
                 </a>
               </h3>
               <p class="project-desc">
-                Spring Boot integration service wrapping third-party Weather and Currency REST APIs with reactive HTTP clients,
-                read-through Redis caching, and non-blocking Kafka audit streams.
+                A resilient integration service that interfaces with external weather and currency APIs using reactive HTTP,
+                caching responses in Redis and streaming audit logs through Apache Kafka.
               </p>
 
               <ul class="project-highlights">
-                <li>Uses Spring WebFlux <code>WebClient</code> with timeouts and Redis TTL caching (10-min expiry, Lettuce pool) to cut external API latency.</li>
-                <li>Publishes asynchronous <code>AuditEvent</code> messages to Apache Kafka with isolated error handling and manual consumer offset commits.</li>
-                <li>Ships with a one-command <code>docker-compose.yml</code> (Kafka KRaft + Redis + App) and Prometheus health endpoints.</li>
+                <li>Integrates third-party APIs using Spring WebFlux <code>WebClient</code>, with Redis 10-minute TTL caching to cut redundant outbound network calls.</li>
+                <li>Streams audit events asynchronously to Apache Kafka with isolated error handling and manual consumer offset management.</li>
+                <li>Packaged with Docker Compose (Kafka KRaft mode, Redis, and Spring Boot) and Prometheus monitoring endpoints.</li>
               </ul>
             </div>
 
@@ -478,14 +478,14 @@
                 </a>
               </h3>
               <p class="project-desc">
-                Quiz and assessment REST backend paired with a React 19 + Tailwind CSS SPA, featuring hierarchical categories,
-                JWT refresh tokens, and attempt-level grading analytics.
+                An online assessment platform featuring an automated scoring engine, attempt history tracking,
+                and role-based permissions, paired with a React and Tailwind frontend.
               </p>
 
               <ul class="project-highlights">
-                <li>Prevents duplicate wrong-option guesses and repeat submissions on solved questions via <code>UserAttemptLog</code> tracking.</li>
-                <li>Secures admin question-bank CRUD and student attempt endpoints with role-based JWT + UUID refresh tokens.</li>
-                <li>Configured with MySQL/JPA persistence and cloud deployment profiles.</li>
+                <li>Enforces exam integrity with <code>UserAttemptLog</code> tracking to prevent duplicate guesses and repeat submissions on resolved questions.</li>
+                <li>Secures administrative question management and student tests using role-based JWT authentication with UUID refresh tokens.</li>
+                <li>Built with Spring Data JPA and MySQL, structured around clean service layers and ready for containerized deployment.</li>
               </ul>
             </div>
 
@@ -532,14 +532,14 @@
                 </a>
               </h3>
               <p class="project-desc">
-                Dedicated Spring Boot authentication and onboarding service implementing email account verification,
-                HTTP-only cookie token storage, and refresh token rotation.
+                A dedicated authentication microservice focused on secure user onboarding, verified account activation,
+                and resilient token management using HTTP-only cookies.
               </p>
 
               <ul class="project-highlights">
-                <li>Sends expiring email verification tokens on sign-up before activating <code>USER</code> or <code>ADMIN</code> accounts.</li>
-                <li>Stores short-lived access JWTs (15 min) and path-scoped refresh tokens inside <code>HttpOnly</code> <code>SameSite=Lax</code> cookies.</li>
-                <li>Rotates refresh tokens in MySQL on every refresh call and revokes active tokens cleanly on logout.</li>
+                <li>Verifies new accounts via expiring email verification links before granting access to protected roles.</li>
+                <li>Protects sessions against XSS vulnerabilities by issuing short-lived access JWTs and refresh tokens inside <code>HttpOnly</code>, <code>SameSite=Lax</code> cookies.</li>
+                <li>Rotates refresh tokens in MySQL on every exchange, invalidating compromised sessions and cleanly revoking tokens on logout.</li>
               </ul>
             </div>
 
@@ -573,8 +573,8 @@
     <section id="experience" class="section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-eyebrow">03 / BACKGROUND</p>
-          <h2 class="section-title">Experience &amp; Education</h2>
+          <p class="section-eyebrow">03 / EXPERIENCE &amp; EDUCATION</p>
+          <h2 class="section-title">Career &amp; Learning Journey</h2>
         </div>
 
         <div class="timeline">
@@ -586,9 +586,8 @@
             <div class="timeline-content">
               <h3>Software Engineer A1 &mdash; Java Backend Developer</h3>
               <p>
-                Designing, developing, and maintaining production Java &amp; Spring Boot RESTful services —
-                implementing authentication and role-based access control, optimizing relational/NoSQL database queries with Redis caching,
-                and collaborating across Agile sprints via Git reviews and Docker environments.
+                Building and maintaining production Java and Spring Boot backend services. I work on role-based authentication and secure APIs,
+                optimize database queries and caching with Redis, and collaborate in Agile sprint cycles using Git reviews and Docker.
               </p>
             </div>
           </div>
@@ -601,8 +600,8 @@
             <div class="timeline-content">
               <h3>B.Sc. in Computer Science &amp; Information Technology (B.Sc. CSIT)</h3>
               <p>
-                Completed four-year Bachelor of Science degree focused on Data Structures &amp; Algorithms,
-                Database Management Systems, Operating Systems, Computer Networks, Object-Oriented Programming in Java, and Software Engineering.
+                Completed a four-year Bachelor's degree in Computer Science, building core fundamentals in Data Structures &amp; Algorithms,
+                Database Management Systems, Computer Networks, Operating Systems, and Object-Oriented Software Engineering in Java.
               </p>
             </div>
           </div>
@@ -613,10 +612,10 @@
               <span class="timeline-location">Self-Directed</span>
             </div>
             <div class="timeline-content">
-              <h3>AWS Cloud &amp; Distributed System Design</h3>
+              <h3>Distributed Systems &amp; AWS Cloud</h3>
               <p>
-                Building hands-on backend architectures exploring multi-tenant data isolation, Redis caching &amp; rate limiting,
-                asynchronous Kafka event pipelines, and multi-container Docker + Nginx deployments.
+                Deepening practical knowledge in distributed backend architecture &mdash; focusing on database indexing,
+                multi-tenant data isolation patterns, asynchronous Kafka event pipelines, and containerized deployments on AWS.
               </p>
             </div>
           </div>
@@ -629,11 +628,11 @@
       <div class="container">
         <div class="contact-box spotlight-card reveal">
           <div>
-            <p class="section-eyebrow">04 / GET IN TOUCH</p>
-            <h2 class="section-title">Let's build something reliable.</h2>
+            <p class="section-eyebrow">04 / CONTACT</p>
+            <h2 class="section-title">Let's build something great.</h2>
             <p class="contact-desc">
-              Available for full-time Java / Spring Boot backend engineering roles and backend API projects.
-              Email is the fastest way to reach me.
+              I'm currently open to full-time backend engineering opportunities (Java / Spring Boot) and backend API projects.
+              Feel free to reach out directly via email or connect on LinkedIn.
             </p>
           </div>
 
