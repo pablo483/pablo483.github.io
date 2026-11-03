@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudarshan GC — Java &amp; Spring Boot Backend Engineer</title>
+  <meta
+    name="description"
+    content="Portfolio of Sudarshan GC, Software Engineer (Java &amp; Spring Boot Backend) from Nepal specializing in REST APIs, PostgreSQL, MySQL, MongoDB, Redis, Apache Kafka, Docker, and AWS."
+  />
+  <meta property="og:title" content="Sudarshan GC — Java &amp; Spring Boot Backend Engineer" />
+  <meta
+    property="og:description"
+    content="Backend Software Engineer building multi-tenant SaaS APIs, caching layers, and event-driven Spring Boot services."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pablo483.github.io/" />
+  <link rel="canonical" href="https://pablo483.github.io/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient Background Grid & Floating Aurora Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-grid"></div>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <!-- Sticky Navigation -->
+  <header class="site-header">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Sudarshan GC Home">
+        <span class="brand-prompt">&gt;_</span>
+        <span class="brand-name">Sudarshan GC</span>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Primary Navigation">
+        <a href="#skills" data-nav="skills">Skills</a>
+        <a href="#projects" data-nav="projects">Projects</a>
+        <a href="#experience" data-nav="experience">Experience</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          type="button"
+          class="icon-btn"
+          id="theme-toggle"
+          aria-label="Toggle light and dark theme"
+          title="Switch theme"
+        >
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a
+          href="https://github.com/pablo483"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-sm"
+        >
+          GitHub
+        </a>
+
+        <button
+          type="button"
+          class="icon-btn mobile-menu-btn"
+          id="mobile-menu-btn"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero / Short Intro + Interactive Backend Pipeline Terminal -->
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Open to Backend Software Engineer Roles • Nepal &amp; Remote</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Sudarshan GC</span>.<br />
+            I engineer <span class="typing-wrap"><span id="typing-role">Spring Boot REST APIs.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Software Engineer with <strong>1 year of professional experience</strong> building production Java &amp; Spring Boot backends —
+            specializing in multi-tenant SaaS isolation, authentication security, Redis caching, and event-driven Apache Kafka pipelines.
+            Currently deepening my skills in <strong>AWS</strong> and <strong>Distributed System Design</strong>.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary btn-shine">
+              <span>Explore Projects</span>
+              <span aria-hidden="true">&darr;</span>
+            </a>
+            <a
+              href="https://github.com/pablo483"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              GitHub (@pablo483)
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sudarshan-g-c-8323a5442/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              LinkedIn
+            </a>
+            <button
+              type="button"
+              class="btn btn-ghost copy-email-btn"
+              data-email="sudarshangc580@gmail.com"
+            >
+              Copy: sudarshangc580@gmail.com
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Backend Pipeline Inspector -->
+        <aside class="terminal-card spotlight-card reveal" style="--delay: 120ms" aria-label="Interactive Backend Request Trace">
+          <div class="terminal-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">spring-boot-pipeline — bash</span>
+          </div>
+
+          <div class="terminal-tabs" role="tablist" aria-label="Select sample API pipeline">
+            <button type="button" class="term-tab active" data-trace="saas" role="tab" aria-selected="true">
+              Inventory SaaS
+            </button>
+            <button type="button" class="term-tab" data-trace="kafka" role="tab" aria-selected="false">
+              Kafka + Redis
+            </button>
+            <button type="button" class="term-tab" data-trace="auth" role="tab" aria-selected="false">
+              Cookie JWT
+            </button>
+          </div>
+
+          <div class="terminal-body" id="terminal-body">
+            <div class="term-line cmd">
+              <span class="prompt">$</span> curl -H "X-Tenant-ID: org_nepal" /api/inventory
+            </div>
+            <div class="term-line step">
+              <span class="badge-ok">FILTER</span> TenantInterceptor &rarr; isolated context
+            </div>
+            <div class="term-line step">
+              <span class="badge-ok">LIMIT</span> Bucket4j token bucket &rarr; allowed
+            </div>
+            <div class="term-line step">
+              <span class="badge-cache">CACHE</span> Redis Jedis pool &rarr; HIT
+            </div>
+            <div class="term-line step">
+              <span class="badge-http">200 OK</span> Nginx upstream (app1/app2/app3)
+            </div>
+          </div>
+
+          <div class="terminal-footer">
+            <span>Click tabs above to inspect real project flows</span>
+            <span class="live-indicator"><span class="live-ping"></span>Java 17 • Spring 3.5</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">01 / CAPABILITIES</p>
+          <h2 class="section-title">Technical Stack</h2>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card spotlight-card reveal" style="--delay: 0ms">
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true">{ }</span>
+              <h3>Backend &amp; Frameworks</h3>
+            </div>
+            <ul class="tag-list">
+              <li>Java 17+</li>
+              <li>Spring Boot 3</li>
+              <li>Spring Security</li>
+              <li>Spring Data JPA / Hibernate</li>
+              <li>REST APIs</li>
+              <li>WebFlux (WebClient)</li>
+              <li>JWT &amp; Cookie Auth</li>
+            </ul>
+          </div>
+
+          <div class="skill-card spotlight-card reveal" style="--delay: 70ms">
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true">DB</span>
+              <h3>Databases &amp; Caching</h3>
+            </div>
+            <ul class="tag-list">
+              <li>PostgreSQL</li>
+              <li>MySQL</li>
+              <li>MongoDB</li>
+              <li>Redis (Cache &amp; Pub/Sub)</li>
+              <li>Flyway Migrations</li>
+              <li>HikariCP</li>
+            </ul>
+          </div>
+
+          <div class="skill-card spotlight-card reveal" style="--delay: 140ms">
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true">&gt;&gt;</span>
+              <h3>Messaging, Cloud &amp; DevOps</h3>
+            </div>
+            <ul class="tag-list">
+              <li>Apache Kafka</li>
+              <li>Docker &amp; Compose</li>
+              <li>AWS</li>
+              <li>Nginx (Load Balancing)</li>
+              <li>Git &amp; GitHub Actions</li>
+              <li>Maven</li>
+            </ul>
+          </div>
+
+          <div class="skill-card spotlight-card reveal" style="--delay: 210ms">
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true">OPS</span>
+              <h3>Reliability &amp; Learning</h3>
+            </div>
+            <ul class="tag-list">
+              <li>Bucket4j Rate Limiting</li>
+              <li>Spring Actuator</li>
+              <li>Prometheus Metrics</li>
+              <li>Grafana k6 Load Tests</li>
+              <li>JUnit 5 &amp; Mockito</li>
+              <li class="tag-highlight">Learning: System Design &amp; AWS</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header section-header-row reveal">
+          <div>
+            <p class="section-eyebrow">02 / SHIPPED CODE</p>
+            <h2 class="section-title">Featured Backend Projects</h2>
+          </div>
+
+          <div class="filter-bar" role="group" aria-label="Filter projects by category">
+            <button type="button" class="filter-btn active" data-filter="all">All (5)</button>
+            <button type="button" class="filter-btn" data-filter="redis">Redis &amp; Scale</button>
+            <button type="button" class="filter-btn" data-filter="kafka">Kafka</button>
+            <button type="button" class="filter-btn" data-filter="security">Auth &amp; Security</button>
+            <button type="button" class="filter-btn" data-filter="fullstack">Full-Stack</button>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+          <!--
+            HOW TO ADD A NEW PROJECT LATER:
+            Copy one <article class="project-card spotlight-card reveal">...</article> block below,
+            update the title, summary, 3 bullet points, tech tags, and GitHub link!
+          -->
+
+          <!-- Project 1: Inventory-SAAS -->
+          <article class="project-card spotlight-card featured reveal" data-tags="redis security fullstack">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-badge">Flagship Architecture</span>
+                <span class="project-type">Multi-Tenant SaaS</span>
+              </div>
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer">
+                  Multi-Tenant Inventory Management SaaS
+                </a>
+              </h3>
+              <p class="project-desc">
+                Production-style multi-tenant SaaS platform isolating organizations, inventory transactions,
+                supplier workflows, and subscription plans behind a horizontally scaled Spring Boot backend and React/TypeScript UI.
+              </p>
+
+              <ul class="project-highlights">
+                <li>Enforces tenant context isolation via custom <code>TenantInterceptor</code>, Flyway SQL migrations, and tuned HikariCP pools.</li>
+                <li>Implements Redis caching, Pub/Sub inventory events, sorted-set leaderboards, and Bucket4j API rate limiting.</li>
+                <li>Containerized with <code>docker-compose.prod.yml</code> load-balancing Nginx across 3 Spring Boot instances, plus Prometheus metrics and Grafana k6 load scripts.</li>
+              </ul>
+            </div>
+
+            <div class="project-bottom">
+              <ul class="tag-list compact">
+                <li>Java 17</li>
+                <li>Spring Boot 3.5</li>
+                <li>MySQL</li>
+                <li>Flyway</li>
+                <li>Redis</li>
+                <li>Bucket4j</li>
+                <li>Docker &amp; Nginx</li>
+                <li>Prometheus &amp; k6</li>
+                <li>React / TS</li>
+              </ul>
+
+              <div class="project-links">
+                <a
+                  href="https://github.com/pablo483/Inventory-SAAS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Source Code &amp; README <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/Inventory-SAAS/blob/main/DOCKER_EXPLANATION.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  Docker Architecture Docs <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Ecommerce_Cloud -->
+          <article class="project-card spotlight-card reveal" style="--delay: 60ms" data-tags="redis security">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-type">REST API • MongoDB &amp; Redis</span>
+              </div>
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer">
+                  Multi-Vendor E-Commerce Backend
+                </a>
+              </h3>
+              <p class="project-desc">
+                Role-based e-commerce API supporting <code>ADMIN</code>, <code>VENDOR</code>, and <code>USER</code> workflows
+                with cloud media storage, Redis caching, and scheduled inventory alerting.
+              </p>
+
+              <ul class="project-highlights">
+                <li>Handles multipart product creation with Cloudinary image uploads and paginated keyword/price/category search.</li>
+                <li>Includes an admin moderation pipeline to approve or reject pending vendor listings.</li>
+                <li>Runs a daily <code>@Scheduled</code> cron job to detect low-stock products and email vendors automatically via SMTP.</li>
+              </ul>
+            </div>
+
+            <div class="project-bottom">
+              <ul class="tag-list compact">
+                <li>Java 17</li>
+                <li>Spring Boot 3.4</li>
+                <li>MongoDB</li>
+                <li>Spring Security &amp; JWT</li>
+                <li>Redis</li>
+                <li>Cloudinary</li>
+                <li>Spring Mail</li>
+              </ul>
+
+              <div class="project-links">
+                <a
+                  href="https://github.com/pablo483/Ecommerce_Cloud"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Source Code &amp; API Table <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: external-api-integration -->
+          <article class="project-card spotlight-card reveal" style="--delay: 120ms" data-tags="redis kafka">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-type">Event-Driven Microservice</span>
+              </div>
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/external-api-integration" target="_blank" rel="noopener noreferrer">
+                  Event-Driven External API Gateway
+                </a>
+              </h3>
+              <p class="project-desc">
+                Spring Boot integration service wrapping third-party Weather and Currency REST APIs with reactive HTTP clients,
+                read-through Redis caching, and non-blocking Kafka audit streams.
+              </p>
+
+              <ul class="project-highlights">
+                <li>Uses Spring WebFlux <code>WebClient</code> with timeouts and Redis TTL caching (10-min expiry, Lettuce pool) to cut external API latency.</li>
+                <li>Publishes asynchronous <code>AuditEvent</code> messages to Apache Kafka with isolated error handling and manual consumer offset commits.</li>
+                <li>Ships with a one-command <code>docker-compose.yml</code> (Kafka KRaft + Redis + App) and Prometheus health endpoints.</li>
+              </ul>
+            </div>
+
+            <div class="project-bottom">
+              <ul class="tag-list compact">
+                <li>Java 17</li>
+                <li>Spring Boot 3.5</li>
+                <li>WebClient</li>
+                <li>Apache Kafka</li>
+                <li>Redis</li>
+                <li>Docker Compose</li>
+                <li>Prometheus</li>
+              </ul>
+
+              <div class="project-links">
+                <a
+                  href="https://github.com/pablo483/external-api-integration"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Source Code &amp; README <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: online-quiz-backend -->
+          <article class="project-card spotlight-card reveal" style="--delay: 60ms" data-tags="security fullstack">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-type">Full-Stack Platform</span>
+              </div>
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer">
+                  Online Quiz &amp; Automatic Grading Engine
+                </a>
+              </h3>
+              <p class="project-desc">
+                Quiz and assessment REST backend paired with a React 19 + Tailwind CSS SPA, featuring hierarchical categories,
+                JWT refresh tokens, and attempt-level grading analytics.
+              </p>
+
+              <ul class="project-highlights">
+                <li>Prevents duplicate wrong-option guesses and repeat submissions on solved questions via <code>UserAttemptLog</code> tracking.</li>
+                <li>Secures admin question-bank CRUD and student attempt endpoints with role-based JWT + UUID refresh tokens.</li>
+                <li>Configured with MySQL/JPA persistence and cloud deployment profiles.</li>
+              </ul>
+            </div>
+
+            <div class="project-bottom">
+              <ul class="tag-list compact">
+                <li>Spring Boot 3.5</li>
+                <li>MySQL</li>
+                <li>Spring Data JPA</li>
+                <li>JWT + Refresh Token</li>
+                <li>React 19</li>
+                <li>Tailwind CSS</li>
+              </ul>
+
+              <div class="project-links">
+                <a
+                  href="https://github.com/pablo483/online-quiz-backend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Backend Repo <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/Online-Quiz-Frontend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  Frontend Repo <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: UserOnboarding-API-Cookie -->
+          <article class="project-card spotlight-card reveal" style="--delay: 120ms" data-tags="security">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-type">Security &amp; Auth Service</span>
+              </div>
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank" rel="noopener noreferrer">
+                  Secure User Onboarding &amp; Cookie-JWT API
+                </a>
+              </h3>
+              <p class="project-desc">
+                Dedicated Spring Boot authentication and onboarding service implementing email account verification,
+                HTTP-only cookie token storage, and refresh token rotation.
+              </p>
+
+              <ul class="project-highlights">
+                <li>Sends expiring email verification tokens on sign-up before activating <code>USER</code> or <code>ADMIN</code> accounts.</li>
+                <li>Stores short-lived access JWTs (15 min) and path-scoped refresh tokens inside <code>HttpOnly</code> <code>SameSite=Lax</code> cookies.</li>
+                <li>Rotates refresh tokens in MySQL on every refresh call and revokes active tokens cleanly on logout.</li>
+              </ul>
+            </div>
+
+            <div class="project-bottom">
+              <ul class="tag-list compact">
+                <li>Java</li>
+                <li>Spring Boot</li>
+                <li>Spring Security</li>
+                <li>MySQL</li>
+                <li>HTTP-Only Cookies</li>
+                <li>Spring Mail</li>
+              </ul>
+
+              <div class="project-links">
+                <a
+                  href="https://github.com/pablo483/UserOnboarding-API-Cookie"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Source Code &amp; Auth Flow <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">03 / BACKGROUND</p>
+          <h2 class="section-title">Experience &amp; Focus</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item spotlight-card reveal">
+            <div class="timeline-meta">
+              <span class="timeline-period">1 Year Experience</span>
+              <span class="timeline-location">Nepal</span>
+            </div>
+            <div class="timeline-content">
+              <h3>Software Engineer A1 — Java Backend Developer</h3>
+              <p>
+                Working professionally on Java &amp; Spring Boot backend services — building and maintaining RESTful APIs,
+                implementing authentication and role-based access control, integrating relational/NoSQL databases and caching,
+                and collaborating through Git workflows and code reviews.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item spotlight-card reveal" style="--delay: 80ms">
+            <div class="timeline-meta">
+              <span class="timeline-period">Current Focus</span>
+              <span class="timeline-location">Self-Directed</span>
+            </div>
+            <div class="timeline-content">
+              <h3>AWS Cloud &amp; Distributed System Design</h3>
+              <p>
+                Building hands-on backend architectures exploring multi-tenant data isolation, Redis caching &amp; rate limiting,
+                asynchronous Kafka event pipelines, and multi-container Docker + Nginx deployments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="contact-box spotlight-card reveal">
+          <div>
+            <p class="section-eyebrow">04 / GET IN TOUCH</p>
+            <h2 class="section-title">Let's build something reliable.</h2>
+            <p class="contact-desc">
+              Available for full-time Java / Spring Boot backend engineering roles and backend API projects.
+              Email is the fastest way to reach me.
+            </p>
+          </div>
+
+          <div class="contact-actions">
+            <a href="mailto:sudarshangc580@gmail.com" class="btn btn-primary btn-shine">
+              Email Me
+            </a>
+            <button
+              type="button"
+              class="btn btn-outline copy-email-btn"
+              data-email="sudarshangc580@gmail.com"
+            >
+              Copy sudarshangc580@gmail.com
+            </button>
+            <a
+              href="https://www.linkedin.com/in/sudarshan-g-c-8323a5442/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              LinkedIn Profile
+            </a>
+            <a
+              href="https://github.com/pablo483"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              GitHub (@pablo483)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> Sudarshan GC • Java Backend Engineer (Nepal)</span>
+      <div class="footer-links">
+        <a href="https://github.com/pablo483" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/sudarshan-g-c-8323a5442/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:sudarshangc580@gmail.com">sudarshangc580@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back-to-Top Button -->
+  <button
+    type="button"
+    id="back-to-top"
+    class="back-to-top"
+    aria-label="Scroll back to top"
+    title="Back to top"
+  >
+    &uarr;
+  </button>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden>
+    Email copied to clipboard!
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
