@@ -97,51 +97,39 @@
 
     /* Header */
     .header {
-      border-bottom: 2px solid #0f172a;
+      text-align: center;
+      border-bottom: 1.5px solid #0f172a;
       padding-bottom: 8px;
       margin-bottom: 9px;
     }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-    }
-
     .name {
-      font-size: 23px;
+      font-size: 25px;
       font-weight: 800;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.3px;
       color: #0f172a;
-      line-height: 1.15;
-    }
-
-    .role {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #0369a1;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
+      line-height: 1.18;
     }
 
     .contact-row {
       margin-top: 4px;
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 2px 9px;
-      font-size: 10.5px;
-      color: #334155;
+      gap: 2px 8px;
+      font-size: 10.6px;
+      color: #1e293b;
       line-height: 1.45;
     }
 
     .contact-links-row {
-      margin-top: 1.5px;
+      margin-top: 2px;
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 2px 9px;
-      font-size: 10.5px;
-      color: #334155;
+      gap: 2px 8px;
+      font-size: 10.6px;
+      color: #1e293b;
       line-height: 1.45;
     }
 
@@ -153,7 +141,7 @@
     }
 
     .sep {
-      color: #94a3b8;
+      color: #64748b;
     }
 
     /* Sections */
@@ -303,24 +291,20 @@
     <div>
       <!-- HEADER -->
       <header class="header">
-        <div class="header-top">
-          <h1 class="name">SUDARSHAN GC</h1>
-          <span class="role">Software Engineer — Java &amp; Spring Boot Backend</span>
-        </div>
+        <h1 class="name">Sudarshan GC</h1>
         <div class="contact-row">
           <span>Kathmandu, Nepal</span>
-          <span class="sep">•</span>
-          <span>+977-9828848513</span>
-          <span class="sep">•</span>
+          <span class="sep">|</span>
+          <span>+9779828848513</span>
+          <span class="sep">|</span>
           <a href="mailto:sudarshangc580@gmail.com">sudarshangc580@gmail.com</a>
         </div>
         <div class="contact-links-row">
-          <span><strong>Portfolio:</strong> <a href="https://pablo483.github.io/">pablo483.github.io</a></span>
-          <span class="sep">•</span>
-          <span><strong>GitHub:</strong> <a href="https://github.com/pablo483">github.com/pablo483</a></span>
-          <span class="sep">•</span>
-          <span><strong>LinkedIn:</strong> <a
-              href="https://www.linkedin.com/in/sudarshan-g-c-8323a5442/">linkedin.com/in/sudarshan-g-c-8323a5442</a></span>
+          <a href="https://www.linkedin.com/in/sudarshan-g-c-8323a5442/">LinkedIn</a>
+          <span class="sep">|</span>
+          <a href="https://pablo483.github.io/">Portfolio</a>
+          <span class="sep">|</span>
+          <a href="https://github.com/pablo483">GitHub</a>
         </div>
       </header>
 
@@ -388,7 +372,8 @@
 
         <div class="entry">
           <div class="entry-head">
-            <a class="entry-title project-title-link" href="https://github.com/pablo483/Inventory-SAAS">Multi-Tenant Inventory Management SaaS<span class="ext-arrow">&#8599;</span></a>
+            <a class="entry-title project-title-link" href="https://github.com/pablo483/Inventory-SAAS">Multi-Tenant
+              Inventory Management SaaS<span class="ext-arrow">&#8599;</span></a>
           </div>
           <div class="project-stack">Stack: Java 17, Spring Boot 3.5, MySQL, Flyway, Redis, Bucket4j, Docker, Nginx,
             Prometheus, Grafana k6</div>
@@ -401,20 +386,23 @@
               limiting validated with <strong>Grafana k6</strong> load scripts.</li>
             <li>Automated zero-drift schema migrations with <strong>Flyway</strong> and orchestrated a 3-replica
               horizontal Spring Boot cluster behind <strong>Nginx</strong> with <strong>Docker Compose</strong> and
-              <strong>Prometheus</strong> metrics.</li>
+              <strong>Prometheus</strong> metrics.
+            </li>
           </ul>
         </div>
 
         <div class="entry">
           <div class="entry-head">
-            <a class="entry-title project-title-link" href="https://github.com/pablo483/Ecommerce_Cloud">Multi-Vendor Cloud E-Commerce Platform<span class="ext-arrow">&#8599;</span></a>
+            <a class="entry-title project-title-link" href="https://github.com/pablo483/Ecommerce_Cloud">Multi-Vendor
+              Cloud E-Commerce Platform<span class="ext-arrow">&#8599;</span></a>
           </div>
           <div class="project-stack">Stack: Java 17, Spring Boot 3.4, MongoDB, Spring Security, JWT, Redis, Cloudinary,
             Spring Mail</div>
           <ul class="bullets">
             <li>Engineered a multi-vendor marketplace REST API segregating <code>ADMIN</code>, <code>VENDOR</code>, and
               <code>USER</code> permissions through stateless <strong>JWT</strong> authentication filters and
-              method-level <code>@PreAuthorize</code> security.</li>
+              method-level <code>@PreAuthorize</code> security.
+            </li>
             <li>Built paginated product search and category filtering backed by <strong>Redis</strong> caching,
               multipart cloud image uploads via <strong>Cloudinary</strong>, and admin vendor-approval workflows.</li>
             <li>Automated daily <code>@Scheduled</code> stock-threshold scans that detect low-inventory SKUs and
@@ -424,7 +412,9 @@
 
         <div class="entry">
           <div class="entry-head">
-            <a class="entry-title project-title-link" href="https://github.com/pablo483/external-api-integration">Event-Driven External API Gateway<span class="ext-arrow">&#8599;</span></a>
+            <a class="entry-title project-title-link"
+              href="https://github.com/pablo483/external-api-integration">Event-Driven External API Gateway<span
+                class="ext-arrow">&#8599;</span></a>
           </div>
           <div class="project-stack">Stack: Java 17, Spring Boot 3.5, Reactive WebClient, Apache Kafka, Redis, Docker
           </div>
