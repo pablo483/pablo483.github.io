@@ -938,6 +938,46 @@ html.js-ready .reveal.is-visible {
   margin-bottom: 0.42rem;
 }
 
+/* Architecture Flow Strip & Metric Pills */
+.arch-flow {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.74rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  background: var(--tag-bg);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+  margin: 0.55rem 0 0.85rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.arch-flow strong {
+  color: var(--accent);
+}
+
+.project-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.55rem 0 0.85rem;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
 .project-bottom {
   display: flex;
   flex-direction: column;

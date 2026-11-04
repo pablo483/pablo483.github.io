@@ -119,10 +119,10 @@
 
   // 8. Hero Typewriter Cycling Effect
   const phrases = [
-    "reliable backend systems.",
-    "Spring Boot REST APIs.",
-    "multi-tenant SaaS backends.",
-    "Redis caching & Kafka pipelines."
+    "backend APIs that don't fall over.",
+    "clean Spring Boot REST services.",
+    "multi-tenant data pipelines.",
+    "caching & rate-limiting layers."
   ];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -264,6 +264,18 @@
         showToast("Copied: " + email);
       } catch {
         window.location.href = "mailto:" + email;
+      }
+    });
+  });
+
+  // 12. Spam-protected dynamic email link opener
+  document.querySelectorAll(".js-email-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const u = link.getAttribute("data-user");
+      const d = link.getAttribute("data-domain");
+      if (u && d) {
+        window.location.href = "mailto:" + u + "@" + d;
       }
     });
   });

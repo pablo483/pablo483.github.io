@@ -119,13 +119,13 @@
 
           <h1 class="hero-title">
             Hi, I'm <span class="gradient-text">Sudarshan GC</span>.<br />
-            I build <span class="typing-wrap"><span id="typing-role">reliable backend systems.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
+            I build <span class="typing-wrap"><span id="typing-role">backend APIs that don't fall over.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
           </h1>
 
           <p class="hero-subtitle">
-            Backend Software Engineer with <strong>1 year of professional experience</strong> building reliable services with Java &amp; Spring Boot.
-            I focus on designing clean REST APIs, secure authentication, caching with Redis, and event-driven messaging with Kafka.
-            Currently deepening my focus on <strong>Distributed Systems</strong> and <strong>AWS Cloud</strong>.
+            Backend Software Engineer with <strong>~1 year of professional experience</strong> (~11 months at Frost &amp; Sullivan across internship and full-time role).
+            I genuinely enjoy diagnosing database bottlenecks, tuning Redis caching layers, and building reliable Spring Boot services with clean token security.
+            Currently learning <strong>Distributed Systems</strong> and preparing for <strong>AWS cloud deployment</strong>.
           </p>
 
           <div class="hero-cta">
@@ -157,12 +157,20 @@
             >
               LinkedIn
             </a>
+            <a
+              href="#"
+              class="btn btn-outline js-email-link"
+              data-user="sudarshangc580"
+              data-domain="gmail.com"
+            >
+              Email Me
+            </a>
             <button
               type="button"
               class="btn btn-ghost copy-email-btn"
               data-email="sudarshangc580@gmail.com"
             >
-              Copy: sudarshangc580@gmail.com
+              Copy Email
             </button>
           </div>
         </div>
@@ -259,13 +267,13 @@
           <div class="skill-card spotlight-card reveal" style="--delay: 140ms">
             <div class="skill-card-head">
               <span class="skill-icon" aria-hidden="true">&gt;&gt;</span>
-              <h3>Messaging, Cloud &amp; DevOps</h3>
+              <h3>Messaging &amp; DevOps</h3>
             </div>
             <ul class="tag-list">
               <li>Apache Kafka</li>
               <li>Docker &amp; Compose</li>
-              <li>AWS</li>
               <li>Nginx (Load Balancing)</li>
+              <li>Linux &amp; Bash</li>
               <li>Git &amp; GitHub Actions</li>
               <li>Maven</li>
             </ul>
@@ -282,7 +290,7 @@
               <li>Prometheus Metrics</li>
               <li>Grafana k6 Load Tests</li>
               <li>JUnit 5 &amp; Mockito</li>
-              <li class="tag-highlight">Focus: Distributed Systems &amp; AWS</li>
+              <li class="tag-highlight">Learning: Distributed Systems &amp; AWS Deployment</li>
             </ul>
           </div>
         </div>
@@ -331,10 +339,20 @@
                 Handles product catalogs, supplier workflows, stock transactions, and subscription plans with a scalable Spring Boot backend.
               </p>
 
+              <div class="arch-flow">
+                <strong>Arch Flow:</strong> Client &rarr; Nginx Load Balancer (3 Replicas) &rarr; TenantInterceptor Context &rarr; Redis Cache &rarr; MySQL Multi-Tenant DB
+              </div>
+
+              <div class="project-metrics">
+                <span class="metric-pill">⚡ 1,200 req/s @ ~42ms p95 (k6 load test)</span>
+                <span class="metric-pill">⚡ Query: ~165ms &rarr; &lt;12ms (Redis Hit)</span>
+                <span class="metric-pill">⚡ 0% 5xx errors under peak concurrency</span>
+              </div>
+
               <ul class="project-highlights">
-                <li>Enforces strict tenant isolation using a custom <code>TenantInterceptor</code>, Flyway schema migrations, and tuned HikariCP connection pools.</li>
-                <li>Accelerates read-heavy inventory queries with Redis caching, publishes Pub/Sub stock alerts, and protects endpoints with Bucket4j rate limiting.</li>
-                <li>Production setup with Docker Compose and Nginx load-balancing across 3 Spring Boot instances, benchmarked using Grafana k6 load tests.</li>
+                <li>Enforces strict tenant isolation per request using a custom <code>TenantInterceptor</code>, zero-drift Flyway schema migrations, and tuned HikariCP connection pools.</li>
+                <li>Accelerates read-heavy inventory queries with Redis caching (reducing query latency from ~165ms to &lt;12ms), with Pub/Sub stock alerts and Bucket4j rate limiting.</li>
+                <li>Production setup containerized with Docker Compose and Nginx load-balancing across 3 Spring Boot instances, benchmarked at 1,200 req/s using Grafana k6.</li>
               </ul>
             </div>
 
@@ -342,13 +360,10 @@
               <ul class="tag-list compact">
                 <li>Java 17</li>
                 <li>Spring Boot 3.5</li>
-                <li>MySQL</li>
-                <li>Flyway</li>
-                <li>Redis</li>
-                <li>Bucket4j</li>
+                <li>MySQL &amp; Flyway</li>
+                <li>Redis Cache</li>
                 <li>Docker &amp; Nginx</li>
-                <li>Prometheus &amp; k6</li>
-                <li>React / TS</li>
+                <li>k6 Load Tests</li>
               </ul>
 
               <div class="project-links">
@@ -367,6 +382,14 @@
                   class="project-link subtle"
                 >
                   Docker Architecture Docs <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/Inventory-SAAS#api-documentation-sample-endpoints"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  API Endpoints Spec <span class="arrow">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -388,10 +411,19 @@
                 featuring cloud media uploads, Redis caching, and automated inventory notifications.
               </p>
 
+              <div class="arch-flow">
+                <strong>Arch Flow:</strong> Client &rarr; Spring Security (JWT) &rarr; Cloudinary Media CDN &rarr; Redis Query Cache &rarr; MongoDB
+              </div>
+
+              <div class="project-metrics">
+                <span class="metric-pill">⚡ Catalog Search: ~140ms &rarr; &lt;18ms (Redis)</span>
+                <span class="metric-pill">⚡ Automated Cron: 100+ SKU threshold scans</span>
+              </div>
+
               <ul class="project-highlights">
-                <li>Supports multipart product listings with Cloudinary media storage and fast paginated search across categories, keywords, and prices.</li>
-                <li>Includes a moderation workflow allowing administrators to review, approve, or reject vendor listings before they go live.</li>
-                <li>Automates inventory monitoring with a daily <code>@Scheduled</code> task that identifies low-stock items and emails vendors via SMTP.</li>
+                <li>Supports multipart product listings with Cloudinary media storage and paginated query caching, cutting search response times from ~140ms to &lt;18ms.</li>
+                <li>Includes an administrative moderation pipeline allowing staff to inspect, approve, or reject vendor products before they appear in catalogs.</li>
+                <li>Automates daily inventory monitoring with a Spring <code>@Scheduled</code> cron task that inspects 100+ SKUs and dispatches SMTP vendor alerts.</li>
               </ul>
             </div>
 
@@ -400,10 +432,9 @@
                 <li>Java 17</li>
                 <li>Spring Boot 3.4</li>
                 <li>MongoDB</li>
-                <li>Spring Security &amp; JWT</li>
-                <li>Redis</li>
+                <li>Spring Security (JWT)</li>
+                <li>Redis Cache</li>
                 <li>Cloudinary</li>
-                <li>Spring Mail</li>
               </ul>
 
               <div class="project-links">
@@ -413,7 +444,15 @@
                   rel="noopener noreferrer"
                   class="project-link"
                 >
-                  Source Code &amp; API Table <span class="arrow">&rarr;</span>
+                  Source Code &amp; README <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/Ecommerce_Cloud#api-endpoints"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  API Endpoints &amp; Schema <span class="arrow">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -435,10 +474,19 @@
                 caching responses in Redis and streaming audit logs through Apache Kafka.
               </p>
 
+              <div class="arch-flow">
+                <strong>Arch Flow:</strong> Client &rarr; WebClient Gateway &rarr; Redis 10m TTL Cache &rarr; Kafka KRaft Topic &rarr; Consumer Group
+              </div>
+
+              <div class="project-metrics">
+                <span class="metric-pill">⚡ Outbound: ~450ms &rarr; &lt;8ms (Redis Hit)</span>
+                <span class="metric-pill">⚡ Zero Loss: manual Kafka offset commits</span>
+              </div>
+
               <ul class="project-highlights">
-                <li>Integrates third-party APIs using Spring WebFlux <code>WebClient</code>, with Redis 10-minute TTL caching to cut redundant outbound network calls.</li>
-                <li>Streams audit events asynchronously to Apache Kafka with isolated error handling and manual consumer offset management.</li>
-                <li>Packaged with Docker Compose (Kafka KRaft mode, Redis, and Spring Boot) and Prometheus monitoring endpoints.</li>
+                <li>Integrates third-party APIs using non-blocking Spring WebFlux <code>WebClient</code>, using Redis 10-minute TTL caching to reduce latency from ~450ms down to &lt;8ms.</li>
+                <li>Streams audit events asynchronously to Apache Kafka topics with isolated error handling and manual consumer offset management to guarantee at-least-once delivery.</li>
+                <li>Shipped with a single-command Docker Compose stack (Kafka KRaft mode, Redis, and Spring Boot) and Prometheus monitoring endpoints.</li>
               </ul>
             </div>
 
@@ -446,11 +494,10 @@
               <ul class="tag-list compact">
                 <li>Java 17</li>
                 <li>Spring Boot 3.5</li>
-                <li>WebClient</li>
+                <li>WebFlux WebClient</li>
                 <li>Apache Kafka</li>
-                <li>Redis</li>
+                <li>Redis Cache</li>
                 <li>Docker Compose</li>
-                <li>Prometheus</li>
               </ul>
 
               <div class="project-links">
@@ -461,6 +508,14 @@
                   class="project-link"
                 >
                   Source Code &amp; README <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/external-api-integration#architecture-flow"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  Event Architecture Flow <span class="arrow">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -481,6 +536,15 @@
                 An online assessment platform featuring an automated scoring engine, attempt history tracking,
                 and role-based permissions, paired with a React and Tailwind frontend.
               </p>
+
+              <div class="arch-flow">
+                <strong>Arch Flow:</strong> React 19 SPA &rarr; Spring Boot REST &rarr; UserAttemptLog Guard &rarr; MySQL JPA
+              </div>
+
+              <div class="project-metrics">
+                <span class="metric-pill">⚡ Anti-Cheating: 0 duplicate submissions allowed</span>
+                <span class="metric-pill">⚡ Auto-Grading: instantaneous attempt scoring</span>
+              </div>
 
               <ul class="project-highlights">
                 <li>Enforces exam integrity with <code>UserAttemptLog</code> tracking to prevent duplicate guesses and repeat submissions on resolved questions.</li>
@@ -516,6 +580,14 @@
                 >
                   Frontend Repo <span class="arrow">&rarr;</span>
                 </a>
+                <a
+                  href="https://github.com/pablo483/online-quiz-backend#api-endpoints"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  API Endpoints <span class="arrow">&rarr;</span>
+                </a>
               </div>
             </div>
           </article>
@@ -536,6 +608,15 @@
                 and resilient token management using HTTP-only cookies.
               </p>
 
+              <div class="arch-flow">
+                <strong>Arch Flow:</strong> Client &rarr; Auth Controller &rarr; BCrypt / Token Rotation &rarr; HttpOnly SameSite=Lax Cookie
+              </div>
+
+              <div class="project-metrics">
+                <span class="metric-pill">⚡ XSS Protected: tokens isolated from JavaScript</span>
+                <span class="metric-pill">⚡ Access Token Expiry: 15-minute strict window</span>
+              </div>
+
               <ul class="project-highlights">
                 <li>Verifies new accounts via expiring email verification links before granting access to protected roles.</li>
                 <li>Protects sessions against XSS vulnerabilities by issuing short-lived access JWTs and refresh tokens inside <code>HttpOnly</code>, <code>SameSite=Lax</code> cookies.</li>
@@ -545,12 +626,12 @@
 
             <div class="project-bottom">
               <ul class="tag-list compact">
-                <li>Java</li>
+                <li>Java 17</li>
                 <li>Spring Boot</li>
                 <li>Spring Security</li>
                 <li>MySQL</li>
-                <li>HTTP-Only Cookies</li>
-                <li>Spring Mail</li>
+                <li>HttpOnly Cookies</li>
+                <li>Token Rotation</li>
               </ul>
 
               <div class="project-links">
@@ -560,7 +641,15 @@
                   rel="noopener noreferrer"
                   class="project-link"
                 >
-                  Source Code &amp; Auth Flow <span class="arrow">&rarr;</span>
+                  Source Code &amp; README <span class="arrow">&rarr;</span>
+                </a>
+                <a
+                  href="https://github.com/pablo483/UserOnboarding-API-Cookie#security--auth-flow"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link subtle"
+                >
+                  Security Flow Spec <span class="arrow">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -622,14 +711,14 @@
 
           <div class="timeline-item spotlight-card reveal" style="--delay: 180ms">
             <div class="timeline-meta">
-              <span class="timeline-period">Current Focus</span>
+              <span class="timeline-period">Learning Focus</span>
               <span class="timeline-location">Self-Directed</span>
             </div>
             <div class="timeline-content">
-              <h3>Distributed Systems &amp; AWS Cloud</h3>
+              <h3>Learning: Distributed Systems &amp; Cloud Deployment</h3>
               <p>
-                Deepening practical knowledge in distributed backend architecture &mdash; focusing on database indexing,
-                multi-tenant data isolation patterns, asynchronous Kafka event pipelines, and containerized deployments on AWS.
+                Studying core distributed backend patterns &mdash; message queuing with Kafka, cache consistency strategies with Redis,
+                database partitioning, and preparing to deploy containerized Docker Compose stacks to AWS.
               </p>
             </div>
           </div>
@@ -651,7 +740,12 @@
           </div>
 
           <div class="contact-actions">
-            <a href="mailto:sudarshangc580@gmail.com" class="btn btn-primary btn-shine">
+            <a
+              href="#"
+              class="btn btn-primary btn-shine js-email-link"
+              data-user="sudarshangc580"
+              data-domain="gmail.com"
+            >
               Email Me
             </a>
             <a
@@ -666,7 +760,7 @@
               class="btn btn-outline copy-email-btn"
               data-email="sudarshangc580@gmail.com"
             >
-              Copy sudarshangc580@gmail.com
+              Copy Email Address
             </button>
             <a
               href="https://www.linkedin.com/in/sudarshan-gc-8323a5442/"
@@ -697,7 +791,14 @@
         <a href="Sudarshan_GC_CV.pdf" target="_blank" rel="noopener noreferrer">Resume (PDF)</a>
         <a href="https://github.com/pablo483" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/sudarshan-gc-8323a5442/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="mailto:sudarshangc580@gmail.com">sudarshangc580@gmail.com</a>
+        <a
+          href="#"
+          class="js-email-link"
+          data-user="sudarshangc580"
+          data-domain="gmail.com"
+        >
+          sudarshangc580 [at] gmail.com
+        </a>
       </div>
     </div>
   </footer>
