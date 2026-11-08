@@ -231,7 +231,7 @@ a {
   gap: 0.6rem;
 }
 
-.mobile-menu-btn {
+.icon-btn.mobile-menu-btn {
   display: none;
 }
 
@@ -1259,7 +1259,7 @@ html.js-ready .reveal.is-visible {
     padding: 3.35rem 0;
   }
 
-  .mobile-menu-btn {
+  .icon-btn.mobile-menu-btn {
     display: inline-flex;
   }
 
