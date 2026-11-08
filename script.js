@@ -3,6 +3,7 @@
   root.classList.add("js-ready");
 
   const themeBtn = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
   const mobileBtn = document.getElementById("mobile-menu-btn");
   const navLinks = document.getElementById("nav-links");
   const yearSpan = document.getElementById("year");
@@ -17,17 +18,101 @@
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 2. Theme toggle (persisted in localStorage)
-  const savedTheme = localStorage.getItem("portfolio_theme");
-  if (savedTheme === "light" || savedTheme === "dark") {
-    root.setAttribute("data-theme", savedTheme);
+  // 2. Theme toggle (persisted in localStorage + animated View Transition circular reveal)
+  let iconSpinTimer = null;
+  let activeViewTransition = null;
+
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem("portfolio_theme", theme);
+    } catch {
+      // Ignore storage errors in restricted contexts
+    }
+    if (themeBtn) {
+      themeBtn.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
   }
+
+  let initialTheme = root.getAttribute("data-theme") === "light" ? "light" : "dark";
+  try {
+    const savedTheme = localStorage.getItem("portfolio_theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      initialTheme = savedTheme;
+    }
+  } catch {
+    // Ignore storage errors
+  }
+  applyTheme(initialTheme);
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("portfolio_theme", next);
+      const isDark = root.getAttribute("data-theme") === "dark";
+      const nextTheme = isDark ? "light" : "dark";
+
+      // Icon spin: toggle CSS class directly on the DOM node
+      if (themeIcon) {
+        themeIcon.classList.remove("theme-icon-spin");
+        void themeIcon.offsetWidth;
+        themeIcon.classList.add("theme-icon-spin");
+        clearTimeout(iconSpinTimer);
+        iconSpinTimer = setTimeout(() => {
+          themeIcon.classList.remove("theme-icon-spin");
+        }, 480);
+      }
+
+      // Fallback for browsers without View Transitions or reduced motion preference
+      if (
+        !document.startViewTransition ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        applyTheme(nextTheme);
+        return;
+      }
+
+      const rect = themeBtn.getBoundingClientRect();
+      const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+      const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const vt = document.startViewTransition(() => {
+        root.classList.add("theme-transitioning");
+        applyTheme(nextTheme);
+      });
+
+      activeViewTransition = vt;
+
+      vt.ready
+        .then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 600,
+              easing: "cubic-bezier(0.45, 0, 0.55, 1)",
+              pseudoElement: "::view-transition-new(root)"
+            }
+          );
+        })
+        .catch(() => {});
+
+      vt.finished
+        .finally(() => {
+          if (activeViewTransition === vt) {
+            root.classList.remove("theme-transitioning");
+            activeViewTransition = null;
+          }
+        });
     });
   }
 

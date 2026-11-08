@@ -1,4 +1,5 @@
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #070b14;
   --bg-elevated: #0f1629;
   --bg-card: rgba(17, 25, 44, 0.78);
@@ -23,6 +24,7 @@
 }
 
 :root[data-theme="light"] {
+  color-scheme: light;
   --bg: #f8fafc;
   --bg-elevated: #ffffff;
   --bg-card: rgba(255, 255, 255, 0.88);
@@ -65,7 +67,6 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Ambient Background Grid & Floating Orbs */
@@ -240,6 +241,61 @@ a {
 
 [data-theme="light"] .icon-sun {
   display: none;
+}
+
+/* Theme Switch: View Transitions Circular Reveal + Icon Spin */
+::view-transition {
+  background: transparent;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  will-change: clip-path;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+.theme-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.theme-icon-wrap svg {
+  display: block;
+}
+
+@keyframes theme-icon-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(160deg) scale(0.65);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.theme-icon-spin {
+  animation: theme-icon-spin 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Buttons & Hover Sheen */
