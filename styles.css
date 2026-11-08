@@ -69,24 +69,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Background Grid & Floating Orbs */
+/* Ambient Aurora Orbs & Interactive Particle Canvas */
 .ambient-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   overflow: hidden;
 }
 
-.ambient-grid {
-  position: absolute;
+.particle-canvas {
+  position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, #000 35%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, #000 35%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 .ambient-orb {
@@ -117,6 +119,7 @@ body {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+
   100% {
     transform: translate3d(40px, 35px, 0) scale(1.08);
   }
@@ -286,9 +289,11 @@ html.theme-transitioning *::after {
   0% {
     transform: rotate(0deg) scale(1);
   }
+
   40% {
     transform: rotate(160deg) scale(0.65);
   }
+
   100% {
     transform: rotate(360deg) scale(1);
   }
@@ -346,12 +351,10 @@ html.theme-transitioning *::after {
   left: -120%;
   width: 65%;
   height: 100%;
-  background: linear-gradient(
-    115deg,
-    transparent,
-    rgba(255, 255, 255, 0.28),
-    transparent
-  );
+  background: linear-gradient(115deg,
+      transparent,
+      rgba(255, 255, 255, 0.28),
+      transparent);
   transform: skewX(-20deg);
   transition: left 0.55s ease;
 }
@@ -455,6 +458,7 @@ html.theme-transitioning *::after {
     transform: scale(0.7);
     opacity: 0.65;
   }
+
   100% {
     transform: scale(2.3);
     opacity: 0;
@@ -479,10 +483,12 @@ html.theme-transitioning *::after {
 }
 
 @keyframes gradientFlow {
+
   0%,
   100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -558,9 +564,11 @@ html.theme-transitioning *::after {
 .dot.red {
   background: #ef4444;
 }
+
 .dot.yellow {
   background: #f59e0b;
 }
+
 .dot.green {
   background: #22c55e;
 }
@@ -618,11 +626,25 @@ html.theme-transitioning *::after {
   animation: termLineIn 0.32s ease forwards;
 }
 
-.term-line:nth-child(1) { animation-delay: 0.02s; }
-.term-line:nth-child(2) { animation-delay: 0.12s; }
-.term-line:nth-child(3) { animation-delay: 0.22s; }
-.term-line:nth-child(4) { animation-delay: 0.32s; }
-.term-line:nth-child(5) { animation-delay: 0.42s; }
+.term-line:nth-child(1) {
+  animation-delay: 0.02s;
+}
+
+.term-line:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.term-line:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+.term-line:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.term-line:nth-child(5) {
+  animation-delay: 0.42s;
+}
 
 @keyframes termLineIn {
   to {
@@ -710,11 +732,9 @@ html.theme-transitioning *::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    460px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    var(--spotlight),
-    transparent 65%
-  );
+  background: radial-gradient(460px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      var(--spotlight),
+      transparent 65%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -930,6 +950,7 @@ html.js-ready .reveal.is-visible {
     opacity: 0;
     transform: scale(0.97) translateY(8px);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -1150,6 +1171,8 @@ html.js-ready .reveal.is-visible {
 
 /* Footer */
 .site-footer {
+  position: relative;
+  z-index: 1;
   border-top: 1px solid var(--border);
   padding: 1.85rem 0;
   font-size: 0.86rem;
@@ -1229,6 +1252,7 @@ html.js-ready .reveal.is-visible {
     opacity: 0;
     transform: translate(-50%, 10px);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -1237,6 +1261,7 @@ html.js-ready .reveal.is-visible {
 
 /* Reduced Motion Accessibility */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

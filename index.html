@@ -35,12 +35,12 @@
   </script>
 </head>
 <body>
-  <!-- Ambient Background Grid & Floating Aurora Orbs -->
+  <!-- Ambient Aurora Orbs & Interactive Particle Lattice Canvas -->
   <div class="ambient-bg" aria-hidden="true">
-    <div class="ambient-grid"></div>
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
   </div>
+  <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
 
   <!-- Sticky Navigation -->
   <header class="site-header">
@@ -830,6 +830,7 @@
     Email copied to clipboard!
   </div>
 
+  <script src="particles.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

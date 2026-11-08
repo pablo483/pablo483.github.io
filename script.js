@@ -21,6 +21,7 @@
   // 2. Theme toggle (persisted in localStorage + animated View Transition circular reveal)
   let iconSpinTimer = null;
   let activeViewTransition = null;
+  let particleEngine = null;
 
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
@@ -34,6 +35,9 @@
         "aria-label",
         theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
       );
+    }
+    if (particleEngine) {
+      particleEngine.syncTheme(theme, true);
     }
   }
 
@@ -364,4 +368,89 @@
       }
     });
   });
+
+  // 13. Interactive Particle Field Background (responsive to pointer, clicks & theme)
+  const particleCanvas = document.getElementById("particle-canvas");
+  if (particleCanvas && typeof window.ParticleField === "function") {
+    try {
+      particleEngine = new window.ParticleField(
+        particleCanvas,
+        root.getAttribute("data-theme") === "light" ? "light" : "dark"
+      );
+      particleEngine.resize();
+
+      const themeObserver = new MutationObserver(() => {
+        if (!particleEngine) return;
+        const current = root.getAttribute("data-theme") === "light" ? "light" : "dark";
+        particleEngine.syncTheme(current, true);
+      });
+      themeObserver.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+      if (prefersReducedMotion) {
+        particleEngine.renderStatic();
+        window.addEventListener("resize", () => {
+          particleEngine.resize();
+          particleEngine.renderStatic();
+        });
+      } else {
+        let rafId = 0;
+        let lastFrame = performance.now();
+        let running = true;
+
+        const frameLoop = (now) => {
+          if (!running) return;
+          const ms = now - lastFrame;
+          lastFrame = now;
+          particleEngine.frame(ms);
+          rafId = requestAnimationFrame(frameLoop);
+        };
+        rafId = requestAnimationFrame(frameLoop);
+
+        window.addEventListener(
+          "pointermove",
+          (e) => {
+            particleEngine.setPointer(e.clientX, e.clientY);
+          },
+          { passive: true }
+        );
+
+        window.addEventListener(
+          "pointerdown",
+          (e) => {
+            const target = e.target instanceof Element ? e.target : null;
+            if (target && target.closest("button, a, input, select, textarea, [data-no-pulse]")) {
+              return;
+            }
+            particleEngine.pulse(e.clientX, e.clientY);
+          },
+          { passive: true }
+        );
+
+        root.addEventListener("pointerleave", (e) => {
+          if (!e.relatedTarget) {
+            particleEngine.releasePointer();
+          }
+        });
+
+        let resizeTimer = null;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => particleEngine.resize(), 120);
+        });
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            running = false;
+            cancelAnimationFrame(rafId);
+          } else {
+            running = true;
+            lastFrame = performance.now();
+            rafId = requestAnimationFrame(frameLoop);
+          }
+        });
+      }
+    } catch {
+      // Fail silently if canvas context cannot be created
+    }
+  }
 })();
