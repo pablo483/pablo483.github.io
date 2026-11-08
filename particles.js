@@ -7,46 +7,46 @@
   "use strict";
 
   const CONFIG = {
-    influence: 150, // px — cursor radius of influence
-    spring: 0.02, // Hooke constant pulling points home
+    influence: 165, // px — cursor radius of influence
+    spring: 0.022, // Hooke constant pulling points home
     damping: 0.9, // velocity decay per frame
-    pointerLerp: 0.16, // cursor smoothing factor
+    pointerLerp: 0.18, // cursor smoothing factor
     maxSpeed: 18, // px/frame velocity clamp
-    baseRadius: 1.15, // resting dot radius (css px)
-    radiusBoost: 1.9, // extra radius at full influence
+    baseRadius: 1.3, // resting dot radius (css px)
+    radiusBoost: 2.1, // extra radius at full influence
     strength: {
-      repel: 1.5,
-      attract: 0.62,
-      vortex: 1.15
+      repel: 1.65,
+      attract: 0.68,
+      vortex: 1.25
     },
     pulseSpeed: 13, // px/frame shockwave expansion
-    pulseWidth: 90, // shockwave band thickness
+    pulseWidth: 96, // shockwave band thickness
     targetParticles: 2400, // desktop budget
     targetParticlesMobile: 850
   };
 
   const THEMES = {
     dark: {
-      ink: [148, 163, 184], // #94a3b8 slate mist
-      accent: [56, 189, 248], // #38bdf8 cyan accent
-      line: [125, 211, 252], // soft cyan-slate tension lines
-      baseAlpha: 0.19,
-      maxDotAlpha: 0.78,
-      maxLineAlpha: 0.22,
-      glowInnerAlpha: 0.11,
-      glowMidAlpha: 0.035,
-      pulseAlpha: 0.34
+      ink: [186, 200, 220], // cool silver-slate dots
+      accent: [56, 189, 248], // #38bdf8 vivid cyan accent
+      line: [56, 189, 248], // luminous cyan tension web
+      baseAlpha: 0.28,
+      maxDotAlpha: 0.96,
+      maxLineAlpha: 0.36,
+      glowInnerAlpha: 0.16,
+      glowMidAlpha: 0.055,
+      pulseAlpha: 0.45
     },
     light: {
-      ink: [51, 65, 85], // #334155 deep slate
+      ink: [30, 41, 59], // #1e293b crisp dark slate
       accent: [2, 132, 199], // #0284c7 sky accent
-      line: [30, 64, 105], // crisp slate-blue tension lines
-      baseAlpha: 0.17,
-      maxDotAlpha: 0.76,
-      maxLineAlpha: 0.2,
-      glowInnerAlpha: 0.085,
-      glowMidAlpha: 0.025,
-      pulseAlpha: 0.3
+      line: [2, 132, 199], // crisp sky tension web
+      baseAlpha: 0.25,
+      maxDotAlpha: 0.94,
+      maxLineAlpha: 0.3,
+      glowInnerAlpha: 0.12,
+      glowMidAlpha: 0.04,
+      pulseAlpha: 0.4
     }
   };
 
@@ -203,11 +203,11 @@
             this.px[i] = x;
             this.py[i] = y;
           } else {
-            // Subtle local intro bloom without obscuring text in tangled crossing lines
-            this.px[i] = x + (Math.random() - 0.5) * 42;
-            this.py[i] = y + (Math.random() - 0.5) * 42;
-            this.vx[i] = (Math.random() - 0.5) * 2.2;
-            this.vy[i] = (Math.random() - 0.5) * 2.2;
+            // Smooth intro settle animation into the geometric lattice
+            this.px[i] = x + (Math.random() - 0.5) * 90;
+            this.py[i] = y + (Math.random() - 0.5) * 90;
+            this.vx[i] = (Math.random() - 0.5) * 3.2;
+            this.vy[i] = (Math.random() - 0.5) * 3.2;
           }
         }
       }

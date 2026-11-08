@@ -406,6 +406,13 @@
         };
         rafId = requestAnimationFrame(frameLoop);
 
+        // Gentle initial pulse ripple after intro settle
+        setTimeout(() => {
+          if (running && particleEngine) {
+            particleEngine.pulse(window.innerWidth * 0.52, window.innerHeight * 0.42);
+          }
+        }, 450);
+
         window.addEventListener(
           "pointermove",
           (e) => {
