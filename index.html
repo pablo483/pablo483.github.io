@@ -19,10 +19,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261108" />
+  <link rel="stylesheet" href="styles.css?v=20261116" />
   <script>
     (function () {
       try {
@@ -120,24 +120,49 @@
   </header>
 
   <main id="top">
-    <!-- Hero / Short Intro + Interactive Backend Pipeline Terminal -->
+    <!-- Hero / Chad-Inspired Character Avatar + Editorial Title + Terminal Logs + Interactive Pipeline -->
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <div class="status-pill">
             <span class="status-dot"></span>
-            <span>Open to Backend Software Engineer Roles • Nepal &amp; Remote</span>
+            <span>ONLINE &bull; Open to Backend Engineer Roles (Nepal &amp; Remote)</span>
           </div>
 
-          <h1 class="hero-title">
-            Hi, I'm <span class="gradient-text">Sudarshan GC</span>.<br />
+          <div class="hero-identity">
+            <figure class="hero-avatar-figure" id="hero-avatar-tilt">
+              <img
+                src="sudarshan-avatar.png"
+                alt="Sudarshan GC character illustration"
+                class="hero-avatar-img"
+                width="220"
+                height="295"
+              />
+            </figure>
+
+            <div class="hero-identity-content">
+              <h1 class="hero-editorial-title" id="scramble-title" title="Hover to decode">
+                Sudarshan<br /><em>GC</em>
+              </h1>
+
+              <p class="hero-terminal-desc">
+                <span class="prompt">$</span> Personal hub for projects, backend experiments, and occasionally questionable code decisions.<span class="terminal-block-cursor" aria-hidden="true"></span>
+              </p>
+
+              <!-- Live Scrolling Terminal Logs (Chad Bercea style) -->
+              <div class="terminal-logs" id="terminal-logs" aria-live="polite">
+                <div class="terminal-log-line">&gt; compiling excuses for technical debt...</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-role-line">
             I build <span class="typing-wrap"><span id="typing-role">backend APIs that don't fall over.</span><span class="typing-cursor" aria-hidden="true">|</span></span>
-          </h1>
+          </p>
 
           <p class="hero-subtitle">
             Backend Software Engineer with <strong>~1 year of professional experience</strong> (~11 months at CAS Total Services across internship and full-time role).
-            I genuinely enjoy diagnosing database bottlenecks, tuning Redis caching layers, and building reliable Spring Boot services with clean token security.
-            Currently learning <strong>Distributed Systems</strong> and preparing for <strong>AWS cloud deployment</strong>.
+            Specializing in <strong>Java &amp; Spring Boot</strong>, Redis caching layers, Apache Kafka event pipelines, and clean JWT security.
           </p>
 
           <div class="hero-cta">
@@ -229,11 +254,12 @@
           </div>
 
           <div class="terminal-footer">
-            <span>Select an endpoint above to trace request execution</span>
+            <span>Move cursor over window or cards for 3D parallax tilt</span>
             <span class="live-indicator"><span class="live-ping"></span>Java 17 • Spring 3.5</span>
           </div>
         </aside>
       </div>
+      <div class="ascii-divider" id="ascii-divider" aria-hidden="true">════════════════════════════════════════════════════════════════════════════════════════════════════</div>
     </section>
 
     <!-- Technical Skills -->
@@ -830,7 +856,7 @@
     Email copied to clipboard!
   </div>
 
-  <script src="particles.js?v=20261108"></script>
-  <script src="script.js?v=20261108"></script>
+  <script src="particles.js?v=20261116"></script>
+  <script src="script.js?v=20261116"></script>
 </body>
 </html>

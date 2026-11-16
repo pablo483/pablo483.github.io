@@ -465,33 +465,171 @@ html.theme-transitioning *::after {
   }
 }
 
-.hero-title {
-  margin: 0 0 1.15rem;
-  font-size: clamp(2rem, 4.1vw, 2.95rem);
-  line-height: 1.18;
-  letter-spacing: -0.03em;
-  font-weight: 800;
+.hero-editorial-title {
+  margin: 0 0 0.75rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3.4rem, 7.2vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  cursor: default;
 }
 
-.gradient-text {
-  background: linear-gradient(120deg, #38bdf8 0%, #818cf8 55%, #34d399 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 6s ease infinite;
+.hero-editorial-title em {
+  font-style: italic;
+  color: var(--accent);
+  text-shadow: 0 0 28px rgba(56, 189, 248, 0.28);
 }
 
-@keyframes gradientFlow {
+.hero-identity {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-bottom: 1.25rem;
+}
 
-  0%,
+.hero-avatar-figure {
+  margin: 0;
+  flex-shrink: 0;
+  perspective: 700px;
+  transform-style: preserve-3d;
+}
+
+.hero-avatar-img {
+  width: 178px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.25)) drop-shadow(0 0 14px rgba(34, 197, 94, 0.16));
+  transition: transform 0.25s ease, filter 0.25s ease;
+  will-change: transform;
+  animation: avatarFloat 5.5s ease-in-out infinite alternate;
+}
+
+.hero-avatar-figure:hover .hero-avatar-img {
+  filter: drop-shadow(0 14px 36px rgba(56, 189, 248, 0.42)) drop-shadow(0 0 20px rgba(52, 211, 153, 0.28));
+}
+
+@keyframes avatarFloat {
+  0% {
+    transform: translateY(0px);
+  }
   100% {
-    background-position: 0% 50%;
+    transform: translateY(-7px);
   }
+}
 
-  50% {
-    background-position: 100% 50%;
+.hero-identity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-terminal-desc {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  max-width: 48ch;
+  line-height: 1.65;
+}
+
+.hero-terminal-desc .prompt {
+  color: var(--success);
+  font-weight: 700;
+  margin-right: 0.35rem;
+  user-select: none;
+}
+
+.terminal-block-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  background: var(--success);
+  vertical-align: text-bottom;
+  margin-left: 5px;
+  animation: blinkCursor 1s step-end infinite;
+}
+
+/* Chad Bercea Style Scrolling Terminal Logs */
+.terminal-logs {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.78;
+  pointer-events: none;
+  margin-top: 0.75rem;
+  min-height: 58px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.terminal-log-line {
+  animation: logFadeIn 0.3s ease-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #94a3b8;
+}
+
+.terminal-log-line.ok {
+  color: #4ade80;
+}
+
+.terminal-log-line.warn {
+  color: #fbbf24;
+}
+
+.terminal-log-line.cmd-log {
+  color: #38bdf8;
+}
+
+.terminal-log-line.fade-out {
+  animation: logFadeOut 0.9s ease-out forwards;
+}
+
+@keyframes logFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.hero-role-line {
+  margin: 0 0 0.65rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.ascii-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  color: var(--border-strong);
+  opacity: 0.45;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+  letter-spacing: -0.5px;
 }
 
 .typing-wrap {
@@ -721,10 +859,15 @@ html.theme-transitioning *::after {
   background: #22c55e;
 }
 
-/* Cursor-Following Spotlight Cards */
+/* Cursor-Following Spotlight + Heavy 3D Tilt & Parallax Cards */
 .spotlight-card {
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+  --shine-x: 50%;
+  --shine-y: 50%;
+  --shine-opacity: 0;
 }
 
 .spotlight-card::before {
@@ -737,10 +880,35 @@ html.theme-transitioning *::after {
       transparent 65%);
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+/* Specular Tilt Shine Overlay (Chad Bercea card::after) */
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--shine-x) var(--shine-y),
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(56, 189, 248, 0.08) 32%,
+    transparent 62%
+  );
+  opacity: var(--shine-opacity);
+  transition: opacity 0.25s ease;
+  z-index: 0;
 }
 
 .spotlight-card:hover::before {
   opacity: 1;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
 }
 
 /* Scroll Reveal Progressive Enhancement */
@@ -1320,5 +1488,15 @@ html.js-ready .reveal.is-visible {
 
   .contact-box {
     padding: 1.55rem;
+  }
+
+  .hero-identity {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.15rem;
+  }
+
+  .hero-avatar-img {
+    width: 148px;
   }
 }

@@ -197,14 +197,298 @@
     sections.forEach((sec) => spyObserver.observe(sec));
   }
 
-  // 7. Cursor-Tracking Spotlight Glow on Cards
+  // 7. Cursor-Tracking Spotlight + Chad Bercea 3D CardTilt & Multi-Layer Depth Parallax
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  class InteractiveBoxTilt {
+    constructor(card) {
+      this.card = card;
+      const isHeroTerminal = card.classList.contains("terminal-card");
+      const isFeatured = card.classList.contains("featured") || card.classList.contains("contact-box");
+
+      this.maxRotation = isHeroTerminal ? 12 : isFeatured ? 10 : 16;
+      this.perspective = 750;
+      this.scale = isHeroTerminal ? 1.02 : 1.035;
+
+      this.children = Array.from(card.children);
+      this.ctaLink = card.querySelector(".project-link, .btn-primary");
+
+      this.isHovering = false;
+      this.currentRot = { x: 0, y: 0 };
+      this.targetRot = { x: 0, y: 0 };
+      this.currentMag = { x: 0, y: 0 };
+      this.targetMag = { x: 0, y: 0 };
+      this.mousePos = { x: 0, y: 0 };
+      this.rafId = null;
+
+      this.init();
+    }
+
+    init() {
+      this.card.addEventListener("mouseenter", () => this.onEnter());
+      this.card.addEventListener("mouseleave", () => this.onLeave());
+      this.card.addEventListener("mousemove", (e) => this.onMove(e));
+    }
+
+    onEnter() {
+      if (prefersReducedMotion) return;
+      this.isHovering = true;
+      this.card.style.zIndex = "10";
+      if (!this.rafId) {
+        this.animate();
+      }
+    }
+
+    onLeave() {
+      this.isHovering = false;
+      this.targetRot = { x: 0, y: 0 };
+      this.targetMag = { x: 0, y: 0 };
+      this.card.style.zIndex = "";
+      this.card.style.setProperty("--shine-opacity", "0");
+    }
+
+    onMove(e) {
+      const rect = this.card.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const relY = e.clientY - rect.top;
+      this.card.style.setProperty("--mouse-x", `${relX}px`);
+      this.card.style.setProperty("--mouse-y", `${relY}px`);
+
+      if (prefersReducedMotion || !this.isHovering) return;
+
+      this.mousePos = { x: e.clientX, y: e.clientY };
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const offsetX = (e.clientX - centerX) / (rect.width / 2);
+      const offsetY = (e.clientY - centerY) / (rect.height / 2);
+
+      // Tilt card toward mouse cursor (Chad Bercea CardTilt math)
+      this.targetRot = {
+        x: -offsetY * this.maxRotation,
+        y: offsetX * this.maxRotation
+      };
+
+      // Magnetic pull on primary link/button inside card
+      if (this.ctaLink) {
+        const btnRect = this.ctaLink.getBoundingClientRect();
+        const bCenterX = btnRect.left + btnRect.width / 2;
+        const bCenterY = btnRect.top + btnRect.height / 2;
+        const dx = this.mousePos.x - bCenterX;
+        const dy = this.mousePos.y - bCenterY;
+        const dist = Math.hypot(dx, dy);
+        const maxDist = 140;
+        const pull = Math.pow(1 - Math.min(dist / maxDist, 1), 2);
+        this.targetMag = {
+          x: dx * pull * 0.38,
+          y: dy * pull * 0.38
+        };
+      }
+    }
+
+    animate() {
+      const ease = 0.14;
+      this.currentRot.x += (this.targetRot.x - this.currentRot.x) * ease;
+      this.currentRot.y += (this.targetRot.y - this.currentRot.y) * ease;
+      this.currentMag.x += (this.targetMag.x - this.currentMag.x) * 0.2;
+      this.currentMag.y += (this.targetMag.y - this.currentMag.y) * 0.2;
+
+      const scale = this.isHovering ? this.scale : 1;
+      this.card.style.transform = `perspective(${this.perspective}px) rotateX(${this.currentRot.x.toFixed(2)}deg) rotateY(${this.currentRot.y.toFixed(2)}deg) scale(${scale})`;
+
+      // Specular shine position based on rotation
+      const shineX = 50 + this.currentRot.y * 2.8;
+      const shineY = 50 - this.currentRot.x * 2.8;
+      this.card.style.setProperty("--shine-x", `${shineX}%`);
+      this.card.style.setProperty("--shine-y", `${shineY}%`);
+      this.card.style.setProperty("--shine-opacity", this.isHovering ? "1" : "0");
+
+      // Multi-layer depth parallax on inner children
+      const factorX = this.currentRot.y / this.maxRotation;
+      const factorY = -this.currentRot.x / this.maxRotation;
+      this.children.forEach((child, idx) => {
+        const depth = 10 + (idx % 3) * 7;
+        const moveX = factorX * depth;
+        const moveY = factorY * depth;
+        child.style.transform = `translate3d(${moveX.toFixed(1)}px, ${moveY.toFixed(1)}px, ${depth}px)`;
+      });
+
+      if (this.ctaLink) {
+        this.ctaLink.style.transform = `translate3d(${this.currentMag.x.toFixed(1)}px, ${this.currentMag.y.toFixed(1)}px, 0)`;
+      }
+
+      const stillMoving =
+        Math.abs(this.targetRot.x - this.currentRot.x) > 0.02 ||
+        Math.abs(this.targetRot.y - this.currentRot.y) > 0.02;
+
+      if (this.isHovering || stillMoving) {
+        this.rafId = requestAnimationFrame(() => this.animate());
+      } else {
+        this.rafId = null;
+        this.card.style.transform = "";
+        this.children.forEach((child) => {
+          child.style.transform = "";
+        });
+        if (this.ctaLink) {
+          this.ctaLink.style.transform = "";
+        }
+      }
+    }
+  }
+
   document.querySelectorAll(".spotlight-card").forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-      card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-    });
+    new InteractiveBoxTilt(card);
   });
+
+  // Hero Avatar 3D Mouse Tilt
+  const heroAvatarFig = document.getElementById("hero-avatar-tilt");
+  if (heroAvatarFig && !prefersReducedMotion) {
+    const avatarImg = heroAvatarFig.querySelector(".hero-avatar-img");
+    heroAvatarFig.addEventListener("mousemove", (e) => {
+      const rect = heroAvatarFig.getBoundingClientRect();
+      const nx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      const ny = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      if (avatarImg) {
+        avatarImg.style.animation = "none";
+        avatarImg.style.transform = `perspective(600px) rotateX(${(-ny * 12).toFixed(1)}deg) rotateY(${(nx * 14).toFixed(1)}deg) scale(1.05)`;
+      }
+    });
+    heroAvatarFig.addEventListener("mouseleave", () => {
+      if (avatarImg) {
+        avatarImg.style.transform = "";
+        avatarImg.style.animation = "";
+      }
+    });
+  }
+
+  // 7b. Chad Bercea Terminal TextScramble Effect on Hero Title ("Sudarshan GC")
+  const scrambleTitle = document.getElementById("scramble-title");
+  if (scrambleTitle && !prefersReducedMotion) {
+    const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`01";
+    let isScrambling = false;
+
+    function getTextNodes(rootNode) {
+      const nodes = [];
+      const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
+      let n;
+      while ((n = walker.nextNode())) {
+        if (n.textContent.trim()) nodes.push(n);
+      }
+      return nodes;
+    }
+
+    const textNodes = getTextNodes(scrambleTitle);
+    const originalTexts = textNodes.map((n) => n.textContent);
+    const totalChars = originalTexts.reduce((sum, t) => sum + t.length, 0);
+
+    function runScramble() {
+      if (isScrambling) return;
+      isScrambling = true;
+      let frame = 0;
+      const totalFrames = totalChars * 3;
+
+      function step() {
+        frame++;
+        const progress = frame / totalFrames;
+        textNodes.forEach((node, nodeIdx) => {
+          const orig = originalTexts[nodeIdx];
+          let out = "";
+          for (let i = 0; i < orig.length; i++) {
+            const ch = orig[i];
+            const charProg = (nodeIdx * 10 + i) / totalChars;
+            if (ch === " " || ch === "\n") {
+              out += ch;
+            } else if (progress > charProg + 0.3) {
+              out += ch;
+            } else {
+              out += chars[Math.floor(Math.random() * chars.length)];
+            }
+          }
+          node.textContent = out;
+        });
+
+        if (frame < totalFrames) {
+          requestAnimationFrame(step);
+        } else {
+          textNodes.forEach((node, idx) => {
+            node.textContent = originalTexts[idx];
+          });
+          isScrambling = false;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    scrambleTitle.addEventListener("mouseenter", runScramble);
+    setTimeout(runScramble, 450);
+  }
+
+  // 7c. Chad Bercea Terminal Scrolling Log Lines & Rotating ASCII Divider
+  const terminalLogsContainer = document.getElementById("terminal-logs");
+  const asciiDivider = document.getElementById("ascii-divider");
+  const terminalLogsList = [
+    "> compiling excuses for technical debt...",
+    '[OK] bugs renamed to "features"',
+    "> checking if anyone is reading this...",
+    "[OK] coffee levels: critically low",
+    "$ whoami -> backend engineer who likes to build stuff",
+    "> googling Spring Boot stack trace...",
+    "[OK] found stackoverflow answer from 2014",
+    "> pushing to production on friday...",
+    "[WARN] this is fine. everything is fine.",
+    "$ git blame -> it was me. it's always me.",
+    "> flushing Redis cache & hoping for the best...",
+    "[OK] works on my machine™",
+    "> pretending to understand distributed consensus...",
+    "[OK] successfully nodded in architecture review",
+    "$ sudo make me a sandwich -> okay."
+  ];
+
+  if (terminalLogsContainer && !prefersReducedMotion) {
+    let logIdx = 1;
+    function appendTerminalLog() {
+      const text = terminalLogsList[logIdx % terminalLogsList.length];
+      logIdx++;
+      const line = document.createElement("div");
+      line.className = "terminal-log-line";
+      if (text.startsWith("[OK]")) line.classList.add("ok");
+      else if (text.startsWith("[WARN]")) line.classList.add("warn");
+      else if (text.startsWith("$")) line.classList.add("cmd-log");
+      line.textContent = text;
+      terminalLogsContainer.appendChild(line);
+
+      setTimeout(() => {
+        line.classList.add("fade-out");
+        setTimeout(() => line.remove(), 900);
+      }, 4200);
+
+      while (terminalLogsContainer.children.length > 4) {
+        terminalLogsContainer.firstChild.remove();
+      }
+
+      const nextDelay = 1400 + Math.random() * 1900;
+      setTimeout(appendTerminalLog, nextDelay);
+    }
+    setTimeout(appendTerminalLog, 1600);
+  }
+
+  if (asciiDivider && !prefersReducedMotion) {
+    const asciiPatterns = [
+      "═══════════════════",
+      "───────────────────",
+      "┌──────────────────┐",
+      "└──────────────────┘",
+      "╔══════════════════╗",
+      "╚══════════════════╝",
+      "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓",
+      "░░░░░░░░░░░░░░░░░░░",
+      "├──────────────────┤"
+    ];
+    setInterval(() => {
+      const p = asciiPatterns[Math.floor(Math.random() * asciiPatterns.length)];
+      asciiDivider.textContent = p.repeat(12);
+    }, 5000);
+  }
 
   // 8. Hero Typewriter Cycling Effect
   const phrases = [
@@ -213,7 +497,6 @@
     "multi-tenant data pipelines.",
     "caching & rate-limiting layers."
   ];
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (typingEl && !prefersReducedMotion) {
     let phraseIndex = 0;
