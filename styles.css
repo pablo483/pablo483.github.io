@@ -519,7 +519,7 @@ html.theme-transitioning *::after {
 }
 
 .hero-avatar-img {
-  width: 200px;
+  width: 215px;
   height: auto;
   display: block;
   filter: drop-shadow(var(--avatar-shadow));
