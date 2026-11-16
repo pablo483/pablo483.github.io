@@ -21,6 +21,8 @@
   --orb-1: rgba(56, 189, 248, 0.16);
   --orb-2: rgba(99, 102, 241, 0.14);
   --shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
+  --avatar-shadow: 0 4px 24px rgba(56, 189, 248, 0.18);
+  --avatar-shadow-hover: 0 8px 32px rgba(56, 189, 248, 0.32);
 }
 
 :root[data-theme="light"] {
@@ -46,6 +48,8 @@
   --orb-1: rgba(14, 165, 233, 0.13);
   --orb-2: rgba(99, 102, 241, 0.1);
   --shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+  --avatar-shadow: 0 4px 24px rgba(2, 132, 199, 0.14);
+  --avatar-shadow-hover: 0 8px 32px rgba(2, 132, 199, 0.24);
 }
 
 *,
@@ -335,13 +339,31 @@ html.theme-transitioning *::after {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
-  color: #ffffff;
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.28);
+  background: rgba(56, 189, 248, 0.16);
+  color: #e0f2fe;
+  border-color: rgba(125, 211, 252, 0.42);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.12);
+  backdrop-filter: blur(8px);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 10px 26px rgba(14, 165, 233, 0.4);
+  background: rgba(56, 189, 248, 0.24);
+  color: #ffffff;
+  border-color: rgba(125, 211, 252, 0.72);
+  box-shadow: 0 8px 22px rgba(56, 189, 248, 0.2);
+}
+
+:root[data-theme="light"] .btn-primary {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0369a1;
+  border-color: rgba(2, 132, 199, 0.35);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.1);
+}
+
+:root[data-theme="light"] .btn-primary:hover {
+  background: rgba(14, 165, 233, 0.2);
+  color: #075985;
+  border-color: rgba(2, 132, 199, 0.55);
 }
 
 .btn-shine::after {
@@ -492,31 +514,19 @@ html.theme-transitioning *::after {
 .hero-avatar-figure {
   margin: 0;
   flex-shrink: 0;
-  perspective: 700px;
-  transform-style: preserve-3d;
 }
 
 .hero-avatar-img {
-  width: 178px;
+  width: 200px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.25)) drop-shadow(0 0 14px rgba(34, 197, 94, 0.16));
-  transition: transform 0.25s ease, filter 0.25s ease;
-  will-change: transform;
-  animation: avatarFloat 5.5s ease-in-out infinite alternate;
+  filter: drop-shadow(var(--avatar-shadow));
+  transition: transform 250ms ease, filter 250ms ease;
 }
 
-.hero-avatar-figure:hover .hero-avatar-img {
-  filter: drop-shadow(0 14px 36px rgba(56, 189, 248, 0.42)) drop-shadow(0 0 20px rgba(52, 211, 153, 0.28));
-}
-
-@keyframes avatarFloat {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-7px);
-  }
+.hero-avatar-img:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(var(--avatar-shadow-hover));
 }
 
 .hero-identity-content {
@@ -594,6 +604,7 @@ html.theme-transitioning *::after {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -604,6 +615,7 @@ html.theme-transitioning *::after {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -889,25 +901,28 @@ html.theme-transitioning *::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    circle at var(--shine-x) var(--shine-y),
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(56, 189, 248, 0.08) 32%,
-    transparent 62%
-  );
+  background: radial-gradient(circle at var(--shine-x) var(--shine-y),
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(56, 189, 248, 0.08) 32%,
+      transparent 62%);
   opacity: var(--shine-opacity);
   transition: opacity 0.25s ease;
   z-index: 0;
+}
+
+.spotlight-card:hover {
+  border-color: var(--accent) !important;
+  box-shadow: 0 14px 36px rgba(56, 189, 248, 0.14);
 }
 
 .spotlight-card:hover::before {
   opacity: 1;
 }
 
-.spotlight-card > * {
+.spotlight-card>* {
   position: relative;
   z-index: 1;
-  transition: transform 0.12s ease-out;
+  transition: transform 0.1s ease-out;
   will-change: transform;
 }
 
@@ -924,6 +939,12 @@ html.js-ready .reveal {
 html.js-ready .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+html.js-ready .spotlight-card.tilt-ready {
+  opacity: 1;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+  transition-delay: 0s !important;
 }
 
 /* Section Headers */
@@ -968,11 +989,10 @@ html.js-ready .reveal.is-visible {
   padding: 1.4rem 1.45rem;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
-  transition: transform 0.22s ease, border-color 0.22s ease;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .skill-card:hover {
-  transform: translateY(-3px);
   border-color: var(--border-strong);
 }
 
@@ -1092,12 +1112,11 @@ html.js-ready .reveal.is-visible {
   padding: 1.6rem;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
-  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .project-card:hover {
   border-color: var(--border-strong);
-  transform: translateY(-4px);
 }
 
 .project-card.featured {
@@ -1276,11 +1295,10 @@ html.js-ready .reveal.is-visible {
   padding: 1.45rem 1.55rem;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
-  transition: transform 0.22s ease, border-color 0.22s ease;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .timeline-item:hover {
-  transform: translateY(-2px);
   border-color: var(--border-strong);
 }
 

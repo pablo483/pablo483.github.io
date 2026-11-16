@@ -225,6 +225,14 @@
     }
 
     init() {
+      // As soon as reveal finishes (or on first hover), clear --delay and CSS transform transition
+      // so 3D tilt works identically on the 1st, 2nd, 3rd, 4th, and 5th cards in every section
+      this.card.addEventListener("transitionend", (e) => {
+        if (e.target === this.card && this.card.classList.contains("is-visible")) {
+          this.card.classList.add("tilt-ready");
+          this.card.style.removeProperty("--delay");
+        }
+      });
       this.card.addEventListener("mouseenter", () => this.onEnter());
       this.card.addEventListener("mouseleave", () => this.onLeave());
       this.card.addEventListener("mousemove", (e) => this.onMove(e));
@@ -232,6 +240,8 @@
 
     onEnter() {
       if (prefersReducedMotion) return;
+      this.card.classList.add("is-visible", "tilt-ready");
+      this.card.style.removeProperty("--delay");
       this.isHovering = true;
       this.card.style.zIndex = "10";
       if (!this.rafId) {
@@ -339,27 +349,6 @@
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     new InteractiveBoxTilt(card);
   });
-
-  // Hero Avatar 3D Mouse Tilt
-  const heroAvatarFig = document.getElementById("hero-avatar-tilt");
-  if (heroAvatarFig && !prefersReducedMotion) {
-    const avatarImg = heroAvatarFig.querySelector(".hero-avatar-img");
-    heroAvatarFig.addEventListener("mousemove", (e) => {
-      const rect = heroAvatarFig.getBoundingClientRect();
-      const nx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-      const ny = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      if (avatarImg) {
-        avatarImg.style.animation = "none";
-        avatarImg.style.transform = `perspective(600px) rotateX(${(-ny * 12).toFixed(1)}deg) rotateY(${(nx * 14).toFixed(1)}deg) scale(1.05)`;
-      }
-    });
-    heroAvatarFig.addEventListener("mouseleave", () => {
-      if (avatarImg) {
-        avatarImg.style.transform = "";
-        avatarImg.style.animation = "";
-      }
-    });
-  }
 
   // 7b. Chad Bercea Terminal TextScramble Effect on Hero Title ("Sudarshan GC")
   const scrambleTitle = document.getElementById("scramble-title");
