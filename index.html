@@ -26,7 +26,7 @@
         if (savedTheme === "light" || savedTheme === "dark") {
           document.documentElement.setAttribute("data-theme", savedTheme);
         }
-      } catch (e) { }
+      } catch (e) {  }
     })();
   </script>
 </head>
@@ -303,7 +303,7 @@
           </div>
 
           <div class="filter-bar" role="group" aria-label="Filter projects by category">
-            <button type="button" class="filter-btn active" data-filter="all">All (6)</button>
+            <button type="button" class="filter-btn active" data-filter="all">All (5)</button>
             <button type="button" class="filter-btn" data-filter="redis">Redis &amp; Scale</button>
             <button type="button" class="filter-btn" data-filter="kafka">Kafka</button>
             <button type="button" class="filter-btn" data-filter="security">Auth &amp; Security</button>
@@ -324,7 +324,9 @@
             </div>
 
             <p class="project-desc">
-              Production multi-tenant SaaS with <code>TenantInterceptor</code> isolation, Flyway migrations, Redis caching (&lt;12ms hits) &amp; Pub/Sub, Bucket4j rate limiting, Nginx 3-replica Docker stack (1,200 req/s in k6), and React 19 + TS UI.
+              Production multi-tenant SaaS with <code>TenantInterceptor</code> isolation, Flyway migrations, Redis
+              caching (&lt;12ms hits) &amp; Pub/Sub, Bucket4j rate limiting, Nginx 3-replica Docker stack (1,200 req/s
+              in k6), and React 19 + TS UI.
             </p>
 
             <div class="card__meta">
@@ -358,7 +360,9 @@
             </div>
 
             <p class="project-desc">
-              Resilient microservice integrating Weather &amp; Currency APIs via reactive WebFlux <code>WebClient</code> (timeout + retry), Redis 10m TTL caching, async Apache Kafka audit pipeline with manual offset commits, Swagger UI, and JUnit 5 tests.
+              Resilient microservice integrating Weather &amp; Currency APIs via reactive WebFlux <code>WebClient</code>
+              (timeout + retry), Redis 10m TTL caching, async Apache Kafka audit pipeline with manual offset commits,
+              Swagger UI, and JUnit 5 tests.
             </p>
 
             <div class="card__meta">
@@ -379,40 +383,7 @@
             </div>
           </article>
 
-          <!-- #3 Rank: hisab-splitwise (55 files, Greedy Debt-Simplification Engine + Spring Boot 3.2 + MySQL/H2 + Docker Compose + Full-Stack SPA) -->
-          <article class="project-card spotlight-card reveal" data-tags="fullstack">
-            <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/hisab-splitwise" target="_blank" rel="noopener noreferrer">
-                  Hisab — Debt-Simplification Engine
-                </a>
-              </h3>
-              <span class="card__status card__status--active">ACTIVE</span>
-            </div>
-
-            <p class="project-desc">
-              Full-stack group expense splitter in NPR featuring equal &amp; custom paisa-exact splits, pairwise net balance tracking, and a greedy minimum-cash-flow debt-simplification algorithm that minimizes group settlement transactions.
-            </p>
-
-            <div class="card__meta">
-              <div class="card__tags">
-                <span class="card__tag">Spring Boot 3.2</span>
-                <span class="card__tag">MySQL / H2</span>
-                <span class="card__tag">Greedy Algorithm</span>
-                <span class="card__tag">Docker Compose</span>
-              </div>
-              <span class="card__date">2026</span>
-            </div>
-
-            <div class="card__links">
-              <a href="https://github.com/pablo483/hisab-splitwise" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
-              </a>
-            </div>
-          </article>
-
-          <!-- #4 Rank: Ecommerce_Cloud (44 files, Multi-Vendor RBAC + MongoDB + Redis Cloud + Cloudinary CDN + Scheduled Low-Stock Alerts) -->
+          <!-- #3 Rank: Ecommerce_Cloud (44 files, Multi-Vendor RBAC + MongoDB + Redis Cloud + Cloudinary CDN + Scheduled Low-Stock Alerts) -->
           <article class="project-card spotlight-card reveal" data-tags="redis security">
             <div class="card__header">
               <h3 class="project-title">
@@ -424,7 +395,9 @@
             </div>
 
             <p class="project-desc">
-              Role-based e-commerce REST backend for customers, vendors, and admins featuring admin product moderation workflows, Cloudinary multipart media CDN, Redis paginated query caching (&lt;18ms), and <code>@Scheduled</code> low-stock SMTP alerts.
+              Role-based e-commerce REST backend for customers, vendors, and admins featuring admin product moderation
+              workflows, Cloudinary multipart media CDN, Redis paginated query caching (&lt;18ms), and
+              <code>@Scheduled</code> low-stock SMTP alerts.
             </p>
 
             <div class="card__meta">
@@ -457,7 +430,9 @@
             </div>
 
             <p class="project-desc">
-              Full-stack assessment platform with instantaneous auto-grading, anti-cheat <code>UserAttemptLog</code> guards against duplicate option guesses, JWT + UUID refresh tokens, paired with a React 19 + Tailwind CSS frontend.
+              Full-stack assessment platform with instantaneous auto-grading, anti-cheat <code>UserAttemptLog</code>
+              guards against duplicate option guesses, JWT + UUID refresh tokens, paired with a React 19 + Tailwind CSS
+              frontend.
             </p>
 
             <div class="card__meta">
@@ -491,7 +466,9 @@
             </div>
 
             <p class="project-desc">
-              Dedicated authentication microservice with expiring SMTP email verification links, XSS-isolated <code>HttpOnly</code> / <code>SameSite=Lax</code> cookie JWTs (15m window), and stateful refresh token rotation in MySQL.
+              Dedicated authentication microservice with expiring SMTP email verification links, XSS-isolated
+              <code>HttpOnly</code> / <code>SameSite=Lax</code> cookie JWTs (15m window), and stateful refresh token
+              rotation in MySQL.
             </p>
 
             <div class="card__meta">
