@@ -22,7 +22,7 @@
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261116d" />
+  <link rel="stylesheet" href="styles.css?v=20261116e" />
   <script>
     (function () {
       try {
@@ -346,7 +346,7 @@
           </div>
 
           <div class="filter-bar" role="group" aria-label="Filter projects by category">
-            <button type="button" class="filter-btn active" data-filter="all">All (5)</button>
+            <button type="button" class="filter-btn active" data-filter="all">All (6)</button>
             <button type="button" class="filter-btn" data-filter="redis">Redis &amp; Scale</button>
             <button type="button" class="filter-btn" data-filter="kafka">Kafka</button>
             <button type="button" class="filter-btn" data-filter="security">Auth &amp; Security</button>
@@ -355,342 +355,195 @@
         </div>
 
         <div class="projects-grid" id="projects-grid">
-          <!--
-            HOW TO ADD A NEW PROJECT LATER:
-            Copy one <article class="project-card spotlight-card reveal">...</article> block below,
-            update the title, summary, 3 bullet points, tech tags, and GitHub link!
-          -->
-
           <!-- Project 1: Inventory-SAAS -->
-          <article class="project-card spotlight-card featured reveal" data-tags="redis security fullstack">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-badge">Flagship Architecture</span>
-                <span class="project-type">Multi-Tenant SaaS</span>
-              </div>
+          <article class="project-card spotlight-card reveal" data-tags="redis security fullstack">
+            <div class="card__header">
               <h3 class="project-title">
                 <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer">
-                  Multi-Tenant Inventory Management SaaS
+                  Multi-Tenant Inventory SaaS
                 </a>
               </h3>
-              <p class="project-desc">
-                A multi-tenant inventory platform designed for complete data isolation between organizations.
-                Handles product catalogs, supplier workflows, stock transactions, and subscription plans with a scalable Spring Boot backend.
-              </p>
-
-              <div class="arch-flow">
-                <strong>Arch Flow:</strong> Client &rarr; Nginx Load Balancer (3 Replicas) &rarr; TenantInterceptor Context &rarr; Redis Cache &rarr; MySQL Multi-Tenant DB
-              </div>
-
-              <div class="project-metrics">
-                <span class="metric-pill">⚡ 1,200 req/s @ ~42ms p95 (k6 load test)</span>
-                <span class="metric-pill">⚡ Query: ~165ms &rarr; &lt;12ms (Redis Hit)</span>
-                <span class="metric-pill">⚡ 0% 5xx errors under peak concurrency</span>
-              </div>
-
-              <ul class="project-highlights">
-                <li>Enforces strict tenant isolation per request using a custom <code>TenantInterceptor</code>, zero-drift Flyway schema migrations, and tuned HikariCP connection pools.</li>
-                <li>Accelerates read-heavy inventory queries with Redis caching (reducing query latency from ~165ms to &lt;12ms), with Pub/Sub stock alerts and Bucket4j rate limiting.</li>
-                <li>Production setup containerized with Docker Compose and Nginx load-balancing across 3 Spring Boot instances, benchmarked at 1,200 req/s using Grafana k6.</li>
-              </ul>
+              <span class="card__status card__status--active">ACTIVE</span>
             </div>
 
-            <div class="project-bottom">
-              <ul class="tag-list compact">
-                <li>Java 17</li>
-                <li>Spring Boot 3.5</li>
-                <li>MySQL &amp; Flyway</li>
-                <li>Redis Cache</li>
-                <li>Docker &amp; Nginx</li>
-                <li>k6 Load Tests</li>
-              </ul>
+            <p class="project-desc">
+              Multi-tenant inventory platform with strict <code>TenantInterceptor</code> isolation, Redis caching (&lt;12ms hits), Bucket4j rate limiting, and Nginx load-balanced Docker replicas (1,200 req/s).
+            </p>
 
-              <div class="project-links">
-                <a
-                  href="https://github.com/pablo483/Inventory-SAAS"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  Source Code &amp; README <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/Inventory-SAAS/blob/main/DOCKER_EXPLANATION.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  Docker Architecture Docs <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/Inventory-SAAS#api-documentation-sample-endpoints"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  API Endpoints Spec <span class="arrow">&rarr;</span>
-                </a>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">Spring Boot 3.5</span>
+                <span class="card__tag">MySQL</span>
+                <span class="card__tag">Redis</span>
+                <span class="card__tag">Docker</span>
               </div>
+              <span class="card__date">2026</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
             </div>
           </article>
 
           <!-- Project 2: Ecommerce_Cloud -->
-          <article class="project-card spotlight-card reveal" style="--delay: 60ms" data-tags="redis security">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-type">REST API • MongoDB &amp; Redis</span>
-              </div>
+          <article class="project-card spotlight-card reveal" data-tags="redis security">
+            <div class="card__header">
               <h3 class="project-title">
                 <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer">
-                  Multi-Vendor E-Commerce Backend
+                  Multi-Vendor E-Commerce API
                 </a>
               </h3>
-              <p class="project-desc">
-                A modular e-commerce REST API designed around role-based workflows for customers, vendors, and administrators,
-                featuring cloud media uploads, Redis caching, and automated inventory notifications.
-              </p>
-
-              <div class="arch-flow">
-                <strong>Arch Flow:</strong> Client &rarr; Spring Security (JWT) &rarr; Cloudinary Media CDN &rarr; Redis Query Cache &rarr; MongoDB
-              </div>
-
-              <div class="project-metrics">
-                <span class="metric-pill">⚡ Catalog Search: ~140ms &rarr; &lt;18ms (Redis)</span>
-                <span class="metric-pill">⚡ Automated Cron: 100+ SKU threshold scans</span>
-              </div>
-
-              <ul class="project-highlights">
-                <li>Supports multipart product listings with Cloudinary media storage and paginated query caching, cutting search response times from ~140ms to &lt;18ms.</li>
-                <li>Includes an administrative moderation pipeline allowing staff to inspect, approve, or reject vendor products before they appear in catalogs.</li>
-                <li>Automates daily inventory monitoring with a Spring <code>@Scheduled</code> cron task that inspects 100+ SKUs and dispatches SMTP vendor alerts.</li>
-              </ul>
+              <span class="card__status card__status--active">ACTIVE</span>
             </div>
 
-            <div class="project-bottom">
-              <ul class="tag-list compact">
-                <li>Java 17</li>
-                <li>Spring Boot 3.4</li>
-                <li>MongoDB</li>
-                <li>Spring Security (JWT)</li>
-                <li>Redis Cache</li>
-                <li>Cloudinary</li>
-              </ul>
+            <p class="project-desc">
+              Role-based e-commerce REST backend for customers, vendors, and admins featuring Cloudinary media CDN, Redis paginated query caching (&lt;18ms), and scheduled SKU stock alerts.
+            </p>
 
-              <div class="project-links">
-                <a
-                  href="https://github.com/pablo483/Ecommerce_Cloud"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  Source Code &amp; README <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/Ecommerce_Cloud#api-endpoints"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  API Endpoints &amp; Schema <span class="arrow">&rarr;</span>
-                </a>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">Spring Boot 3.4</span>
+                <span class="card__tag">MongoDB</span>
+                <span class="card__tag">Redis</span>
+                <span class="card__tag">JWT</span>
               </div>
+              <span class="card__date">2026</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
             </div>
           </article>
 
           <!-- Project 3: external-api-integration -->
-          <article class="project-card spotlight-card reveal" style="--delay: 120ms" data-tags="redis kafka">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-type">Event-Driven Microservice</span>
-              </div>
+          <article class="project-card spotlight-card reveal" data-tags="redis kafka">
+            <div class="card__header">
               <h3 class="project-title">
                 <a href="https://github.com/pablo483/external-api-integration" target="_blank" rel="noopener noreferrer">
                   Event-Driven External API Gateway
                 </a>
               </h3>
-              <p class="project-desc">
-                A resilient integration service that interfaces with external weather and currency APIs using reactive HTTP,
-                caching responses in Redis and streaming audit logs through Apache Kafka.
-              </p>
-
-              <div class="arch-flow">
-                <strong>Arch Flow:</strong> Client &rarr; WebClient Gateway &rarr; Redis 10m TTL Cache &rarr; Kafka KRaft Topic &rarr; Consumer Group
-              </div>
-
-              <div class="project-metrics">
-                <span class="metric-pill">⚡ Outbound: ~450ms &rarr; &lt;8ms (Redis Hit)</span>
-                <span class="metric-pill">⚡ Zero Loss: manual Kafka offset commits</span>
-              </div>
-
-              <ul class="project-highlights">
-                <li>Integrates third-party APIs using non-blocking Spring WebFlux <code>WebClient</code>, using Redis 10-minute TTL caching to reduce latency from ~450ms down to &lt;8ms.</li>
-                <li>Streams audit events asynchronously to Apache Kafka topics with isolated error handling and manual consumer offset management to guarantee at-least-once delivery.</li>
-                <li>Shipped with a single-command Docker Compose stack (Kafka KRaft mode, Redis, and Spring Boot) and Prometheus monitoring endpoints.</li>
-              </ul>
+              <span class="card__status card__status--active">ACTIVE</span>
             </div>
 
-            <div class="project-bottom">
-              <ul class="tag-list compact">
-                <li>Java 17</li>
-                <li>Spring Boot 3.5</li>
-                <li>WebFlux WebClient</li>
-                <li>Apache Kafka</li>
-                <li>Redis Cache</li>
-                <li>Docker Compose</li>
-              </ul>
+            <p class="project-desc">
+              Resilient gateway integrating OpenWeatherMap &amp; Currency APIs via reactive WebFlux <code>WebClient</code>, 10-minute Redis TTL caching, asynchronous Apache Kafka audit streaming, and Swagger UI.
+            </p>
 
-              <div class="project-links">
-                <a
-                  href="https://github.com/pablo483/external-api-integration"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  Source Code &amp; README <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/external-api-integration#architecture-flow"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  Event Architecture Flow <span class="arrow">&rarr;</span>
-                </a>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">Spring Boot 3.5</span>
+                <span class="card__tag">Kafka</span>
+                <span class="card__tag">Redis</span>
+                <span class="card__tag">OpenAPI</span>
               </div>
+              <span class="card__date">2026</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/external-api-integration" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
             </div>
           </article>
 
           <!-- Project 4: online-quiz-backend -->
-          <article class="project-card spotlight-card reveal" style="--delay: 60ms" data-tags="security fullstack">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-type">Full-Stack Platform</span>
-              </div>
+          <article class="project-card spotlight-card reveal" data-tags="security fullstack">
+            <div class="card__header">
               <h3 class="project-title">
                 <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer">
-                  Online Quiz &amp; Automatic Grading Engine
+                  Online Quiz &amp; Auto-Grading Engine
                 </a>
               </h3>
-              <p class="project-desc">
-                An online assessment platform featuring an automated scoring engine, attempt history tracking,
-                and role-based permissions, paired with a React and Tailwind frontend.
-              </p>
-
-              <div class="arch-flow">
-                <strong>Arch Flow:</strong> React 19 SPA &rarr; Spring Boot REST &rarr; UserAttemptLog Guard &rarr; MySQL JPA
-              </div>
-
-              <div class="project-metrics">
-                <span class="metric-pill">⚡ Anti-Cheating: 0 duplicate submissions allowed</span>
-                <span class="metric-pill">⚡ Auto-Grading: instantaneous attempt scoring</span>
-              </div>
-
-              <ul class="project-highlights">
-                <li>Enforces exam integrity with <code>UserAttemptLog</code> tracking to prevent duplicate guesses and repeat submissions on resolved questions.</li>
-                <li>Secures administrative question management and student tests using role-based JWT authentication with UUID refresh tokens.</li>
-                <li>Built with Spring Data JPA and MySQL, structured around clean service layers and ready for containerized deployment.</li>
-              </ul>
+              <span class="card__status card__status--active">ACTIVE</span>
             </div>
 
-            <div class="project-bottom">
-              <ul class="tag-list compact">
-                <li>Spring Boot 3.5</li>
-                <li>MySQL</li>
-                <li>Spring Data JPA</li>
-                <li>JWT + Refresh Token</li>
-                <li>React 19</li>
-                <li>Tailwind CSS</li>
-              </ul>
+            <p class="project-desc">
+              Full-stack assessment platform with instantaneous auto-grading, anti-cheat <code>UserAttemptLog</code> guards against duplicate submissions, UUID refresh tokens, and a React 19 + Tailwind SPA.
+            </p>
 
-              <div class="project-links">
-                <a
-                  href="https://github.com/pablo483/online-quiz-backend"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  Backend Repo <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/Online-Quiz-Frontend"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  Frontend Repo <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/online-quiz-backend#api-endpoints"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  API Endpoints <span class="arrow">&rarr;</span>
-                </a>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">Spring Boot</span>
+                <span class="card__tag">MySQL</span>
+                <span class="card__tag">JWT</span>
+                <span class="card__tag">React 19</span>
               </div>
+              <span class="card__date">2025</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
             </div>
           </article>
 
           <!-- Project 5: UserOnboarding-API-Cookie -->
-          <article class="project-card spotlight-card reveal" style="--delay: 120ms" data-tags="security">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-type">Security &amp; Auth Service</span>
-              </div>
+          <article class="project-card spotlight-card reveal" data-tags="security">
+            <div class="card__header">
               <h3 class="project-title">
                 <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank" rel="noopener noreferrer">
-                  Secure User Onboarding &amp; Cookie-JWT API
+                  Cookie-JWT Onboarding Service
                 </a>
               </h3>
-              <p class="project-desc">
-                A dedicated authentication microservice focused on secure user onboarding, verified account activation,
-                and resilient token management using HTTP-only cookies.
-              </p>
-
-              <div class="arch-flow">
-                <strong>Arch Flow:</strong> Client &rarr; Auth Controller &rarr; BCrypt / Token Rotation &rarr; HttpOnly SameSite=Lax Cookie
-              </div>
-
-              <div class="project-metrics">
-                <span class="metric-pill">⚡ XSS Protected: tokens isolated from JavaScript</span>
-                <span class="metric-pill">⚡ Access Token Expiry: 15-minute strict window</span>
-              </div>
-
-              <ul class="project-highlights">
-                <li>Verifies new accounts via expiring email verification links before granting access to protected roles.</li>
-                <li>Protects sessions against XSS vulnerabilities by issuing short-lived access JWTs and refresh tokens inside <code>HttpOnly</code>, <code>SameSite=Lax</code> cookies.</li>
-                <li>Rotates refresh tokens in MySQL on every exchange, invalidating compromised sessions and cleanly revoking tokens on logout.</li>
-              </ul>
+              <span class="card__status card__status--active">ACTIVE</span>
             </div>
 
-            <div class="project-bottom">
-              <ul class="tag-list compact">
-                <li>Java 17</li>
-                <li>Spring Boot</li>
-                <li>Spring Security</li>
-                <li>MySQL</li>
-                <li>HttpOnly Cookies</li>
-                <li>Token Rotation</li>
-              </ul>
+            <p class="project-desc">
+              Dedicated authentication microservice with email verification links, XSS-isolated <code>HttpOnly</code> / <code>SameSite=Lax</code> cookie JWTs, and automatic refresh token rotation in MySQL.
+            </p>
 
-              <div class="project-links">
-                <a
-                  href="https://github.com/pablo483/UserOnboarding-API-Cookie"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  Source Code &amp; README <span class="arrow">&rarr;</span>
-                </a>
-                <a
-                  href="https://github.com/pablo483/UserOnboarding-API-Cookie#security--auth-flow"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-link subtle"
-                >
-                  Security Flow Spec <span class="arrow">&rarr;</span>
-                </a>
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">Spring Security</span>
+                <span class="card__tag">MySQL</span>
+                <span class="card__tag">HttpOnly</span>
+                <span class="card__tag">JWT</span>
               </div>
+              <span class="card__date">2025</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 6: XCELerate -->
+          <article class="project-card spotlight-card reveal" data-tags="fullstack">
+            <div class="card__header">
+              <h3 class="project-title">
+                <a href="https://github.com/pablo483/XCELerate" target="_blank" rel="noopener noreferrer">
+                  XCELerate Spreadsheet Sandbox
+                </a>
+              </h3>
+              <span class="card__status card__status--active">ACTIVE</span>
+            </div>
+
+            <p class="project-desc">
+              Interactive gamified Excel &amp; data-formula learning platform with a live in-browser formula evaluation engine, progressive XP challenges, and real-time cell validation.
+            </p>
+
+            <div class="card__meta">
+              <div class="card__tags">
+                <span class="card__tag">JavaScript</span>
+                <span class="card__tag">Formula Engine</span>
+                <span class="card__tag">HTML5</span>
+                <span class="card__tag">CSS3</span>
+              </div>
+              <span class="card__date">2026</span>
+            </div>
+
+            <div class="card__links">
+              <a href="https://github.com/pablo483/XCELerate" target="_blank" rel="noopener noreferrer" class="project-link card__link">
+                GitHub &rarr;
+              </a>
             </div>
           </article>
         </div>

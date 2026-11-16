@@ -146,9 +146,9 @@ a {
 
 .container {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 1.35rem;
+  padding: 0 2rem;
 }
 
 .section {
@@ -1099,11 +1099,11 @@ html.js-ready .spotlight-card.tilt-ready {
   box-shadow: 0 0 16px var(--accent-soft);
 }
 
-/* Projects Grid */
+/* Projects Grid (Chad Bercea Compact 3-Column Card Layout) */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.3rem;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
 }
 
 .project-card {
@@ -1112,21 +1112,17 @@ html.js-ready .spotlight-card.tilt-ready {
   justify-content: space-between;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.6rem;
+  border-radius: 10px;
+  padding: 1.5rem;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
   cursor: pointer;
+  position: relative;
   transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .project-card:hover {
-  border-color: var(--border-strong);
-}
-
-.project-card.featured {
-  grid-column: 1 / -1;
-  border-color: var(--border-strong);
+  border-color: var(--accent);
 }
 
 .project-card[hidden] {
@@ -1149,37 +1145,21 @@ html.js-ready .spotlight-card.tilt-ready {
   }
 }
 
-.project-meta {
+.card__header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.65rem;
-}
-
-.project-badge {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.2rem 0.58rem;
-  border-radius: 5px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border: 1px solid var(--border-strong);
-}
-
-.project-type {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.76rem;
-  color: var(--text-muted);
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .project-title {
-  margin: 0 0 0.55rem;
-  font-size: 1.24rem;
-  letter-spacing: -0.015em;
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .project-title a {
@@ -1190,97 +1170,104 @@ html.js-ready .spotlight-card.tilt-ready {
   color: var(--accent);
 }
 
-.project-desc {
-  margin: 0 0 0.95rem;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.project-highlights {
-  margin: 0 0 1.3rem;
-  padding-left: 1.15rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.project-highlights li {
-  margin-bottom: 0.42rem;
-}
-
-/* Architecture Flow Strip & Metric Pills */
-.arch-flow {
-  display: block;
+.card__status {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.74rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: 8px;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.22rem 0.5rem;
   background: var(--tag-bg);
-  border: 1px dashed var(--border-strong);
-  color: var(--text-muted);
-  margin: 0.55rem 0 0.85rem;
-  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.arch-flow strong {
-  color: var(--accent);
+.card__status--active {
+  color: var(--success);
+  border-color: rgba(34, 197, 94, 0.45);
 }
 
-.project-metrics {
+.project-desc {
+  margin: 0 0 1.4rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin: 0.55rem 0 0.85rem;
-}
-
-.metric-pill {
-  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  padding: 0.22rem 0.55rem;
-  border-radius: 6px;
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
-  border: 1px solid rgba(34, 197, 94, 0.25);
-}
-
-.project-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-top: 1.05rem;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.95rem;
   border-top: 1px solid var(--border);
+  margin-top: auto;
 }
 
-.project-links {
+.card__tags {
   display: flex;
+  gap: 0.35rem;
   flex-wrap: wrap;
-  gap: 1.2rem;
 }
 
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--accent);
+.card__tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--tag-text);
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  padding: 2px 0.48rem;
+  border-radius: 4px;
 }
 
-.project-link.subtle {
+.card__date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
   color: var(--text-muted);
 }
 
-.project-link .arrow {
-  display: inline-block;
-  transition: transform 0.18s ease;
+.card__links {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-.project-link:hover .arrow {
-  transform: translateX(4px);
+.project-card:hover .card__links {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover .card__date {
+  opacity: 0;
+}
+
+.card__link {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: var(--bg-elevated);
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.card__link:hover {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 /* Experience Timeline */
