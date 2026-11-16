@@ -353,7 +353,8 @@
   // 7b. Chad Bercea Terminal TextScramble Effect on Hero Title ("Sudarshan GC")
   const scrambleTitle = document.getElementById("scramble-title");
   if (scrambleTitle && !prefersReducedMotion) {
-    const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`01";
+    // Use compact characters that match serif glyph widths so text never expands/reflows
+    const chars = "01/+*:;~-=xzcvbnm";
     let isScrambling = false;
 
     function getTextNodes(rootNode) {
@@ -373,6 +374,12 @@
     function runScramble() {
       if (isScrambling) return;
       isScrambling = true;
+
+      // Lock exact dimensions during scramble so the layout never shifts or flickers
+      const rect = scrambleTitle.getBoundingClientRect();
+      scrambleTitle.style.width = `${Math.ceil(rect.width)}px`;
+      scrambleTitle.style.height = `${Math.ceil(rect.height)}px`;
+
       let frame = 0;
       const totalFrames = totalChars * 3;
 
@@ -402,6 +409,8 @@
           textNodes.forEach((node, idx) => {
             node.textContent = originalTexts[idx];
           });
+          scrambleTitle.style.width = "";
+          scrambleTitle.style.height = "";
           isScrambling = false;
         }
       }

@@ -490,12 +490,14 @@ html.theme-transitioning *::after {
 .hero-editorial-title {
   margin: 0 0 0.75rem;
   font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(3.4rem, 7.2vw, 5.5rem);
+  font-size: clamp(3.4rem, 6.6vw, 5.1rem);
   font-weight: 400;
-  line-height: 0.92;
+  line-height: 0.94;
   letter-spacing: -0.02em;
   color: var(--text);
   cursor: default;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .hero-editorial-title em {
@@ -568,10 +570,12 @@ html.theme-transitioning *::after {
   opacity: 0.78;
   pointer-events: none;
   margin-top: 0.75rem;
-  min-height: 58px;
+  height: 68px;
+  overflow: hidden;
   max-width: 440px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 0.18rem;
 }
 
