@@ -108,7 +108,7 @@
             }
           );
         })
-        .catch(() => {});
+        .catch(() => { });
 
       vt.finished
         .finally(() => {
@@ -278,30 +278,12 @@
         x: -offsetY * this.maxRotation,
         y: offsetX * this.maxRotation
       };
-
-      // Magnetic pull on primary link/button inside card
-      if (this.ctaLink) {
-        const btnRect = this.ctaLink.getBoundingClientRect();
-        const bCenterX = btnRect.left + btnRect.width / 2;
-        const bCenterY = btnRect.top + btnRect.height / 2;
-        const dx = this.mousePos.x - bCenterX;
-        const dy = this.mousePos.y - bCenterY;
-        const dist = Math.hypot(dx, dy);
-        const maxDist = 140;
-        const pull = Math.pow(1 - Math.min(dist / maxDist, 1), 2);
-        this.targetMag = {
-          x: dx * pull * 0.38,
-          y: dy * pull * 0.38
-        };
-      }
     }
 
     animate() {
       const ease = 0.14;
       this.currentRot.x += (this.targetRot.x - this.currentRot.x) * ease;
       this.currentRot.y += (this.targetRot.y - this.currentRot.y) * ease;
-      this.currentMag.x += (this.targetMag.x - this.currentMag.x) * 0.2;
-      this.currentMag.y += (this.targetMag.y - this.currentMag.y) * 0.2;
 
       const scale = this.isHovering ? this.scale : 1;
       this.card.style.transform = `perspective(${this.perspective}px) rotateX(${this.currentRot.x.toFixed(2)}deg) rotateY(${this.currentRot.y.toFixed(2)}deg) scale(${scale})`;
@@ -317,15 +299,11 @@
       const factorX = this.currentRot.y / this.maxRotation;
       const factorY = -this.currentRot.x / this.maxRotation;
       this.children.forEach((child, idx) => {
-        const depth = 10 + (idx % 3) * 7;
+        const depth = 8 + (idx % 3) * 5;
         const moveX = factorX * depth;
         const moveY = factorY * depth;
         child.style.transform = `translate3d(${moveX.toFixed(1)}px, ${moveY.toFixed(1)}px, ${depth}px)`;
       });
-
-      if (this.ctaLink) {
-        this.ctaLink.style.transform = `translate3d(${this.currentMag.x.toFixed(1)}px, ${this.currentMag.y.toFixed(1)}px, 0)`;
-      }
 
       const stillMoving =
         Math.abs(this.targetRot.x - this.currentRot.x) > 0.02 ||
@@ -339,15 +317,37 @@
         this.children.forEach((child) => {
           child.style.transform = "";
         });
-        if (this.ctaLink) {
-          this.ctaLink.style.transform = "";
-        }
       }
     }
   }
 
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     new InteractiveBoxTilt(card);
+  });
+
+  // Make each entire .project-card clickable to open its main GitHub repository link
+  document.querySelectorAll(".project-card").forEach((card) => {
+    const primaryLink = card.querySelector(".project-title a, .project-link");
+    if (!primaryLink) return;
+    card.setAttribute("role", "link");
+    card.setAttribute("tabindex", "0");
+
+    card.addEventListener("click", (e) => {
+      // If user clicked directly on an <a> or <button> inside the card, let that link handle it
+      if (e.target.closest("a, button")) return;
+      // Ignore text selection drags
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) return;
+
+      window.open(primaryLink.href, "_blank", "noopener,noreferrer");
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if ((e.key === "Enter" || e.key === " ") && !e.target.closest("a, button")) {
+        e.preventDefault();
+        window.open(primaryLink.href, "_blank", "noopener,noreferrer");
+      }
+    });
   });
 
   // 7b. Chad Bercea Terminal TextScramble Effect on Hero Title ("Sudarshan GC")

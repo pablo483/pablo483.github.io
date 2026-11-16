@@ -1112,6 +1112,7 @@ html.js-ready .spotlight-card.tilt-ready {
   padding: 1.6rem;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
+  cursor: pointer;
   transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
