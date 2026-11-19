@@ -18,7 +18,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261116f" />
+  <link rel="stylesheet" href="styles.css?v=20261119" />
   <script>
     (function () {
       try {
@@ -26,8 +26,8 @@
         if (savedTheme === "light" || savedTheme === "dark") {
           document.documentElement.setAttribute("data-theme", savedTheme);
         }
-      } catch (e) {   }
-    })()  </script>
+      } catch (e) {    }
+    })( </script>
 </head>
 
 <body>
@@ -311,21 +311,15 @@
         </div>
 
         <div class="projects-grid" id="projects-grid">
-          <!-- #1 Rank: Inventory-SAAS (214 files, Multi-Tenant SaaS + Redis + Nginx + Docker + k6 + React/TS) -->
-          <article class="project-card spotlight-card reveal" data-tags="redis security fullstack">
+          <!-- #1 Rank: Inventory-SAAS -->
+          <article class="project-card card" data-tags="redis security fullstack" data-href="https://github.com/pablo483/Inventory-SAAS">
             <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer">
-                  Multi-Tenant Inventory SaaS
-                </a>
-              </h3>
-              <span class="card__status card__status--active">FLAGSHIP</span>
+              <h3 class="card__title">Multi-Tenant Inventory SaaS</h3>
+              <span class="card__status card__status--active">[ACTIVE]</span>
             </div>
 
-            <p class="project-desc">
-              Production multi-tenant SaaS with <code>TenantInterceptor</code> isolation, Flyway migrations, Redis
-              caching (&lt;12ms hits) &amp; Pub/Sub, Bucket4j rate limiting, Nginx 3-replica Docker stack (1,200 req/s
-              in k6), and React 19 + TS UI.
+            <p class="card__desc">
+              Production multi-tenant SaaS with TenantInterceptor isolation, Flyway migrations, Redis caching (&lt;12ms hits) &amp; Pub/Sub, Bucket4j rate limiting, Nginx 3-replica Docker stack (1,200 req/s in k6), and React 19 + TS UI.
             </p>
 
             <div class="card__meta">
@@ -333,35 +327,27 @@
                 <span class="card__tag">Spring Boot 3.5</span>
                 <span class="card__tag">MySQL &amp; Flyway</span>
                 <span class="card__tag">Redis</span>
-                <span class="card__tag">Docker &amp; Nginx</span>
+                <span class="card__tag">Docker</span>
               </div>
               <span class="card__date">2026</span>
             </div>
 
             <div class="card__links">
-              <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
+              <a href="https://github.com/pablo483/Inventory-SAAS" target="_blank" rel="noopener noreferrer" class="card__link">
+                Repo &rarr;
               </a>
             </div>
           </article>
 
-          <!-- #2 Rank: external-api-integration (WebClient + Redis 7 + Kafka KRaft + OpenAPI/Swagger + JUnit 5/Mockito + Docker Compose) -->
-          <article class="project-card spotlight-card reveal" data-tags="redis kafka">
+          <!-- #2 Rank: external-api-integration -->
+          <article class="project-card card" data-tags="redis kafka" data-href="https://github.com/pablo483/external-api-integration">
             <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/external-api-integration" target="_blank"
-                  rel="noopener noreferrer">
-                  Event-Driven External API Gateway
-                </a>
-              </h3>
-              <span class="card__status card__status--active">ACTIVE</span>
+              <h3 class="card__title">Event-Driven External API Gateway</h3>
+              <span class="card__status card__status--active">[ACTIVE]</span>
             </div>
 
-            <p class="project-desc">
-              Resilient microservice integrating Weather &amp; Currency APIs via reactive WebFlux <code>WebClient</code>
-              (timeout + retry), Redis 10m TTL caching, async Apache Kafka audit pipeline with manual offset commits,
-              Swagger UI, and JUnit 5 tests.
+            <p class="card__desc">
+              Resilient microservice integrating Weather &amp; Currency APIs via reactive WebFlux WebClient (timeout + retry), Redis 10m TTL caching, async Apache Kafka audit pipeline with manual offset commits, Swagger UI, and JUnit 5 tests.
             </p>
 
             <div class="card__meta">
@@ -369,34 +355,27 @@
                 <span class="card__tag">Spring Boot 3.5</span>
                 <span class="card__tag">Apache Kafka</span>
                 <span class="card__tag">Redis 7</span>
-                <span class="card__tag">Swagger / OpenAPI</span>
+                <span class="card__tag">OpenAPI</span>
               </div>
               <span class="card__date">2026</span>
             </div>
 
             <div class="card__links">
-              <a href="https://github.com/pablo483/external-api-integration" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
+              <a href="https://github.com/pablo483/external-api-integration" target="_blank" rel="noopener noreferrer" class="card__link">
+                Repo &rarr;
               </a>
             </div>
           </article>
 
-          <!-- #3 Rank: Ecommerce_Cloud (44 files, Multi-Vendor RBAC + MongoDB + Redis Cloud + Cloudinary CDN + Scheduled Low-Stock Alerts) -->
-          <article class="project-card spotlight-card reveal" data-tags="redis security">
+          <!-- #3 Rank: Ecommerce_Cloud -->
+          <article class="project-card card" data-tags="redis security" data-href="https://github.com/pablo483/Ecommerce_Cloud">
             <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer">
-                  Multi-Vendor E-Commerce API
-                </a>
-              </h3>
-              <span class="card__status card__status--active">ACTIVE</span>
+              <h3 class="card__title">Multi-Vendor E-Commerce API</h3>
+              <span class="card__status card__status--active">[ACTIVE]</span>
             </div>
 
-            <p class="project-desc">
-              Role-based e-commerce REST backend for customers, vendors, and admins featuring admin product moderation
-              workflows, Cloudinary multipart media CDN, Redis paginated query caching (&lt;18ms), and
-              <code>@Scheduled</code> low-stock SMTP alerts.
+            <p class="card__desc">
+              Role-based e-commerce REST backend for customers, vendors, and admins featuring admin product moderation workflows, Cloudinary multipart media CDN, Redis paginated query caching (&lt;18ms), and @Scheduled low-stock SMTP alerts.
             </p>
 
             <div class="card__meta">
@@ -410,28 +389,21 @@
             </div>
 
             <div class="card__links">
-              <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
+              <a href="https://github.com/pablo483/Ecommerce_Cloud" target="_blank" rel="noopener noreferrer" class="card__link">
+                Repo &rarr;
               </a>
             </div>
           </article>
 
-          <!-- #5 Rank: online-quiz-backend + Online-Quiz-Frontend (Full-Stack Assessment Engine + Anti-Cheat Attempt Log + React 19 SPA) -->
-          <article class="project-card spotlight-card reveal" data-tags="security fullstack">
+          <!-- #4 Rank: online-quiz-backend -->
+          <article class="project-card card" data-tags="security fullstack" data-href="https://github.com/pablo483/online-quiz-backend">
             <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer">
-                  Online Quiz &amp; Auto-Grading Engine
-                </a>
-              </h3>
-              <span class="card__status card__status--active">ACTIVE</span>
+              <h3 class="card__title">Online Quiz &amp; Auto-Grading Engine</h3>
+              <span class="card__status card__status--active">[ACTIVE]</span>
             </div>
 
-            <p class="project-desc">
-              Full-stack assessment platform with instantaneous auto-grading, anti-cheat <code>UserAttemptLog</code>
-              guards against duplicate option guesses, JWT + UUID refresh tokens, paired with a React 19 + Tailwind CSS
-              frontend.
+            <p class="card__desc">
+              Full-stack assessment platform with instantaneous auto-grading, anti-cheat UserAttemptLog guards against duplicate option guesses, JWT + UUID refresh tokens, paired with a React 19 + Tailwind CSS frontend.
             </p>
 
             <div class="card__meta">
@@ -439,35 +411,27 @@
                 <span class="card__tag">Spring Boot 3.5</span>
                 <span class="card__tag">MySQL JPA</span>
                 <span class="card__tag">JWT Refresh</span>
-                <span class="card__tag">React 19 SPA</span>
+                <span class="card__tag">React 19</span>
               </div>
               <span class="card__date">2025</span>
             </div>
 
             <div class="card__links">
-              <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
+              <a href="https://github.com/pablo483/online-quiz-backend" target="_blank" rel="noopener noreferrer" class="card__link">
+                Repo &rarr;
               </a>
             </div>
           </article>
 
-          <!-- #6 Rank: UserOnboarding-API-Cookie (HttpOnly Cookie JWT + DB Refresh Token Rotation + Email Verification + GitHub Actions CI) -->
-          <article class="project-card spotlight-card reveal" data-tags="security">
+          <!-- #5 Rank: UserOnboarding-API-Cookie -->
+          <article class="project-card card" data-tags="security" data-href="https://github.com/pablo483/UserOnboarding-API-Cookie">
             <div class="card__header">
-              <h3 class="project-title">
-                <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank"
-                  rel="noopener noreferrer">
-                  Cookie-JWT Onboarding Service
-                </a>
-              </h3>
-              <span class="card__status card__status--active">ACTIVE</span>
+              <h3 class="card__title">Cookie-JWT Onboarding Service</h3>
+              <span class="card__status card__status--active">[ACTIVE]</span>
             </div>
 
-            <p class="project-desc">
-              Dedicated authentication microservice with expiring SMTP email verification links, XSS-isolated
-              <code>HttpOnly</code> / <code>SameSite=Lax</code> cookie JWTs (15m window), and stateful refresh token
-              rotation in MySQL.
+            <p class="card__desc">
+              Dedicated authentication microservice with expiring SMTP email verification links, XSS-isolated HttpOnly / SameSite=Lax cookie JWTs (15m window), and stateful refresh token rotation in MySQL.
             </p>
 
             <div class="card__meta">
@@ -481,9 +445,8 @@
             </div>
 
             <div class="card__links">
-              <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank" rel="noopener noreferrer"
-                class="project-link card__link">
-                GitHub &rarr;
+              <a href="https://github.com/pablo483/UserOnboarding-API-Cookie" target="_blank" rel="noopener noreferrer" class="card__link">
+                Repo &rarr;
               </a>
             </div>
           </article>
@@ -629,8 +592,8 @@
     Email copied to clipboard!
   </div>
 
-  <script src="particles.js?v=20261116d"></script>
-  <script src="script.js?v=20261116d"></script>
+  <script src="particles.js?v=20261119"></script>
+  <script src="script.js?v=20261119"></script>
 </body>
 
 </html>

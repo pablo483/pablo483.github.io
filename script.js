@@ -325,29 +325,213 @@
     new InteractiveBoxTilt(card);
   });
 
-  // Make each entire .project-card clickable to open its main GitHub repository link
-  document.querySelectorAll(".project-card").forEach((card) => {
-    const primaryLink = card.querySelector(".project-title a, .project-link");
-    if (!primaryLink) return;
-    card.setAttribute("role", "link");
-    card.setAttribute("tabindex", "0");
+  // 7a. Exact Chad Bercea CardTilt Effect for Project Cards (.card)
+  // Heavy 3D tilt (maxRotation = 25, perspective = 600, scale = 1.05),
+  // 5-layer 3D depth parallax (header: 40, title: 55, desc: 25, meta: 20, links: 70),
+  // and magnetic attraction on .card__link button
+  class CardTilt {
+    constructor(card) {
+      this.card = card;
 
-    card.addEventListener("click", (e) => {
-      // If user clicked directly on an <a> or <button> inside the card, let that link handle it
-      if (e.target.closest("a, button")) return;
-      // Ignore text selection drags
-      const selection = window.getSelection();
-      if (selection && selection.toString().length > 0) return;
+      // Configuration - HEAVY tilt (exact values from chadbercea.github.io/js/card-tilt.js)
+      this.maxRotation = 25;
+      this.perspective = 600;
+      this.scale = 1.05;
 
-      window.open(primaryLink.href, "_blank", "noopener,noreferrer");
-    });
+      // Magnet configuration
+      this.magnetMaxDistance = 150;
+      this.magnetStrength = 0.8;
 
-    card.addEventListener("keydown", (e) => {
-      if ((e.key === "Enter" || e.key === " ") && !e.target.closest("a, button")) {
-        e.preventDefault();
-        window.open(primaryLink.href, "_blank", "noopener,noreferrer");
+      // Parallax layers with exact Z-depths
+      this.layers = {
+        header: { el: card.querySelector(".card__header"), depth: 40 },
+        title: { el: card.querySelector(".card__title"), depth: 55 },
+        desc: { el: card.querySelector(".card__desc"), depth: 25 },
+        meta: { el: card.querySelector(".card__meta"), depth: 20 },
+        links: { el: card.querySelector(".card__links"), depth: 70 }
+      };
+
+      this.button = card.querySelector(".card__link");
+
+      this.isHovering = false;
+      this.currentRotation = { x: 0, y: 0 };
+      this.targetRotation = { x: 0, y: 0 };
+      this.animationFrame = null;
+
+      this.targetMagnet = { x: 0, y: 0 };
+      this.currentMagnet = { x: 0, y: 0 };
+      this.mousePos = { x: 0, y: 0 };
+
+      this.init();
+    }
+
+    init() {
+      this.card.style.animation = "none";
+      this.card.style.opacity = "1";
+      this.card.style.perspective = `${this.perspective}px`;
+      this.card.style.transformStyle = "preserve-3d";
+
+      this.card.addEventListener("mouseenter", () => this.onMouseEnter());
+      this.card.addEventListener("mouseleave", () => this.onMouseLeave());
+      this.card.addEventListener("mousemove", (e) => this.onMouseMove(e));
+
+      // Clicking anywhere on the card navigates to its GitHub repo
+      this.card.addEventListener("click", (e) => {
+        if (e.target.closest(".card__link")) return;
+        const href = this.card.dataset.href;
+        if (href) {
+          window.open(href, "_blank", "noopener,noreferrer");
+        }
+      });
+    }
+
+    onMouseEnter() {
+      if (prefersReducedMotion) return;
+      this.isHovering = true;
+      this.card.style.zIndex = "10";
+      if (!this.animationFrame) {
+        this.animate();
       }
-    });
+    }
+
+    onMouseLeave() {
+      this.isHovering = false;
+      this.targetRotation = { x: 0, y: 0 };
+      this.targetMagnet = { x: 0, y: 0 };
+      this.card.style.zIndex = "";
+
+      if (prefersReducedMotion) {
+        this.card.style.transform = "";
+        this.resetParallax();
+      }
+    }
+
+    onMouseMove(e) {
+      if (prefersReducedMotion || !this.isHovering) return;
+
+      this.mousePos = { x: e.clientX, y: e.clientY };
+
+      const rect = this.card.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const offsetX = (e.clientX - centerX) / (rect.width / 2);
+      const offsetY = (e.clientY - centerY) / (rect.height / 2);
+
+      // Card faces toward the mouse (exact Chad Bercea rotation formula)
+      this.targetRotation = {
+        x: offsetY * this.maxRotation,
+        y: -offsetX * this.maxRotation
+      };
+
+      this.calculateMagnet();
+    }
+
+    calculateMagnet() {
+      if (!this.button) return;
+
+      const buttonRect = this.button.getBoundingClientRect();
+      const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+      const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+
+      const dx = this.mousePos.x - buttonCenterX;
+      const dy = this.mousePos.y - buttonCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const normalizedDistance = Math.min(distance / this.magnetMaxDistance, 1);
+      const magnetPull = Math.pow(1 - normalizedDistance, 2);
+
+      this.targetMagnet = {
+        x: dx * magnetPull * this.magnetStrength,
+        y: dy * magnetPull * this.magnetStrength
+      };
+    }
+
+    animate() {
+      if (prefersReducedMotion) {
+        this.card.style.transform = "";
+        this.resetParallax();
+        this.animationFrame = null;
+        return;
+      }
+
+      const rotationEase = 0.15;
+      this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * rotationEase;
+      this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * rotationEase;
+
+      const magnetEase = 0.2;
+      this.currentMagnet.x += (this.targetMagnet.x - this.currentMagnet.x) * magnetEase;
+      this.currentMagnet.y += (this.targetMagnet.y - this.currentMagnet.y) * magnetEase;
+
+      const currentScale = this.isHovering ? this.scale : 1;
+
+      this.card.style.transform = `
+        rotateX(${this.currentRotation.x}deg)
+        rotateY(${this.currentRotation.y}deg)
+        scale(${currentScale})
+      `;
+
+      this.applyShine();
+      this.applyParallax();
+
+      const isMoving =
+        Math.abs(this.targetRotation.x - this.currentRotation.x) > 0.01 ||
+        Math.abs(this.targetRotation.y - this.currentRotation.y) > 0.01 ||
+        Math.abs(this.targetMagnet.x - this.currentMagnet.x) > 0.01 ||
+        Math.abs(this.targetMagnet.y - this.currentMagnet.y) > 0.01;
+
+      if (this.isHovering || isMoving) {
+        this.animationFrame = requestAnimationFrame(() => this.animate());
+      } else {
+        this.animationFrame = null;
+        this.card.style.transform = "";
+        this.resetParallax();
+      }
+    }
+
+    applyShine() {
+      const shineX = 50 + this.currentRotation.y * 3;
+      const shineY = 50 + this.currentRotation.x * 3;
+      const opacity = this.isHovering ? 1 : 0;
+
+      this.card.style.setProperty("--shine-x", `${shineX}%`);
+      this.card.style.setProperty("--shine-y", `${shineY}%`);
+      this.card.style.setProperty("--shine-opacity", opacity);
+    }
+
+    applyParallax() {
+      const rotationFactorX = this.currentRotation.x / this.maxRotation;
+      const rotationFactorY = this.currentRotation.y / this.maxRotation;
+
+      Object.entries(this.layers).forEach(([name, layer]) => {
+        if (!layer.el) return;
+
+        const moveX = rotationFactorY * layer.depth * -1;
+        const moveY = rotationFactorX * layer.depth;
+
+        if (name === "links" && this.button) {
+          const totalX = moveX + this.currentMagnet.x;
+          const totalY = moveY + this.currentMagnet.y;
+          layer.el.style.transform = `translate3d(${totalX}px, ${totalY}px, ${layer.depth}px)`;
+        } else {
+          layer.el.style.transform = `translate3d(${moveX}px, ${moveY}px, ${layer.depth}px)`;
+        }
+      });
+    }
+
+    resetParallax() {
+      Object.values(this.layers).forEach((layer) => {
+        if (!layer.el) return;
+        layer.el.style.transform = "";
+      });
+
+      this.currentMagnet = { x: 0, y: 0 };
+      this.targetMagnet = { x: 0, y: 0 };
+    }
+  }
+
+  document.querySelectorAll(".card").forEach((card) => {
+    new CardTilt(card);
   });
 
   // 7b. Chad Bercea Terminal TextScramble Effect on Hero Title ("Sudarshan GC")
