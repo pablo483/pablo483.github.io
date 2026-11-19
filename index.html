@@ -18,7 +18,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261119d" />
+  <link rel="stylesheet" href="styles.css?v=20261119e" />
   <script>
     (function () {
       try {
@@ -167,34 +167,33 @@
           </div>
         </div>
 
-        <!-- Interactive Backend Telemetry & Request Trace Inspector (APM Console Style — Steady, No 3D Tilt) -->
+        <!-- Interactive Backend Telemetry Console (Chad Bercea Minimalist Monochrome Style — No Replay Button, Steady) -->
         <aside class="terminal-card reveal" style="--delay: 120ms"
           aria-label="Interactive Backend Request Trace">
           <div class="terminal-bar">
-            <div class="apm-brand">
+            <div class="terminal-url-bar">
               <span class="apm-dot" aria-hidden="true"></span>
-              <span class="apm-name">API Telemetry</span>
-              <span class="apm-sep">/</span>
-              <span class="terminal-title">request-trace</span>
+              <span class="terminal-title">pablo483.github.io/api-telemetry</span>
             </div>
-            <div class="terminal-bar-actions">
-              <span class="trace-status-pill" id="trace-status-pill">200 OK &bull; 11.4ms</span>
-              <button type="button" class="trace-replay-btn" id="trace-replay-btn" title="Replay request trace">
-                &#8635; Replay
-              </button>
-            </div>
+            <span class="trace-status-pill" id="trace-status-pill">200 OK &bull; 11.4ms</span>
           </div>
 
-          <div class="terminal-tabs" role="tablist" aria-label="Select sample API pipeline">
-            <button type="button" class="term-tab active" data-trace="saas" role="tab" aria-selected="true">
-              <span class="http-method get">GET</span> Inventory SaaS
-            </button>
-            <button type="button" class="term-tab" data-trace="kafka" role="tab" aria-selected="false">
-              <span class="http-method get">GET</span> Kafka + Redis
-            </button>
-            <button type="button" class="term-tab" data-trace="auth" role="tab" aria-selected="false">
-              <span class="http-method post">POST</span> Cookie JWT
-            </button>
+          <div class="preview-hero-strip">
+            <div class="preview-headline">
+              <span class="preview-headline-year">2026 // BACKEND ARCHITECTURE</span>
+              <span class="preview-headline-title">Spring Boot <em>pipeline</em></span>
+            </div>
+            <div class="terminal-tabs" role="tablist" aria-label="Select sample API pipeline">
+              <button type="button" class="term-tab active" data-trace="saas" role="tab" aria-selected="true">
+                Inventory SaaS
+              </button>
+              <button type="button" class="term-tab" data-trace="kafka" role="tab" aria-selected="false">
+                Kafka + Redis
+              </button>
+              <button type="button" class="term-tab" data-trace="auth" role="tab" aria-selected="false">
+                Cookie JWT
+              </button>
+            </div>
           </div>
 
           <div class="trace-meta-strip">
@@ -204,12 +203,12 @@
           </div>
 
           <div class="terminal-body" id="terminal-body">
-            <!-- Populated dynamically by script.js with animated waterfall spans -->
+            <!-- Populated dynamically by script.js -->
           </div>
 
           <div class="trace-response-box">
             <div class="trace-response-head">
-              <span>RESPONSE PAYLOAD (JSON)</span>
+              <span>$ response --json</span>
               <span id="trace-size-label">184 B</span>
             </div>
             <pre class="trace-json" id="trace-json">{ "tenant": "org_nepal", "cache": "HIT", "items": 142, "status": "OK" }</pre>
