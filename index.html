@@ -18,7 +18,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261119c" />
+  <link rel="stylesheet" href="styles.css?v=20261119d" />
   <script>
     (function () {
       try {
@@ -167,20 +167,20 @@
           </div>
         </div>
 
-        <!-- Interactive Backend Telemetry & Request Trace Inspector -->
-        <aside class="terminal-card spotlight-card reveal" style="--delay: 120ms"
+        <!-- Interactive Backend Telemetry & Request Trace Inspector (APM Console Style — Steady, No 3D Tilt) -->
+        <aside class="terminal-card reveal" style="--delay: 120ms"
           aria-label="Interactive Backend Request Trace">
           <div class="terminal-bar">
-            <div class="terminal-dots" aria-hidden="true">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
+            <div class="apm-brand">
+              <span class="apm-dot" aria-hidden="true"></span>
+              <span class="apm-name">API Telemetry</span>
+              <span class="apm-sep">/</span>
+              <span class="terminal-title">request-trace</span>
             </div>
-            <span class="terminal-title">backend-request-trace.log</span>
             <div class="terminal-bar-actions">
               <span class="trace-status-pill" id="trace-status-pill">200 OK &bull; 11.4ms</span>
               <button type="button" class="trace-replay-btn" id="trace-replay-btn" title="Replay request trace">
-                &#9654; Replay
+                &#8635; Replay
               </button>
             </div>
           </div>
