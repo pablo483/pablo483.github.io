@@ -712,35 +712,89 @@
     setTimeout(tickTypewriter, 2200);
   }
 
-  // 9. Interactive Hero Backend Pipeline Inspector
+  // 9. Interactive Hero Backend Telemetry & Distributed Trace Waterfall
   const TRACES = {
-    saas: [
-      { type: "cmd", text: 'curl -H "X-Tenant-ID: org_nepal" /api/inventory' },
-      { badge: "badge-ok", label: "FILTER", text: "TenantInterceptor -> isolated context" },
-      { badge: "badge-ok", label: "LIMIT", text: "Bucket4j token bucket -> allowed" },
-      { badge: "badge-cache", label: "CACHE", text: "Redis Jedis pool -> HIT" },
-      { badge: "badge-http", label: "200 OK", text: "Nginx upstream (app1/app2/app3)" }
-    ],
-    kafka: [
-      { type: "cmd", text: 'curl "/api/weather?city=Kathmandu"' },
-      { badge: "badge-ok", label: "CLIENT", text: "WebFlux WebClient -> OpenWeather API" },
-      { badge: "badge-cache", label: "CACHE", text: "Redis @Cacheable TTL -> stored (10m)" },
-      { badge: "badge-ok", label: "KAFKA", text: "AuditEvent published -> manual_immediate ACK" },
-      { badge: "badge-http", label: "200 OK", text: "Isolated async side-effect complete" }
-    ],
-    auth: [
-      { type: "cmd", text: "curl -X POST /auth/refresh-token --cookie refreshToken=..." },
-      { badge: "badge-ok", label: "COOKIE", text: "HttpOnly SameSite=Lax token extracted" },
-      { badge: "badge-cache", label: "ROTATE", text: "Old DB token revoked -> new token issued" },
-      { badge: "badge-ok", label: "SECURITY", text: "Replay protection verified in MySQL" },
-      { badge: "badge-http", label: "200 OK", text: "Set-Cookie: accessToken (15m expiry)" }
-    ]
+    saas: {
+      status: "200 OK • 11.4ms",
+      node: "upstream: nginx -> app-2/3",
+      cache: "cache: HIT (99.2%)",
+      p95: "11.4ms",
+      rps: "1,200/s",
+      size: "184 B",
+      json: '{ "tenant": "org_nepal", "cache": "HIT", "items": 142, "status": "OK" }',
+      steps: [
+        { type: "cmd", text: 'curl -H "X-Tenant-ID: org_nepal" /api/inventory' },
+        { badge: "badge-ok", label: "FILTER", text: "TenantInterceptor -> isolated context", start: 0, width: 12, ms: "0.8ms" },
+        { badge: "badge-ok", label: "LIMIT", text: "Bucket4j token bucket -> allowed", start: 12, width: 14, ms: "1.1ms" },
+        { badge: "badge-cache", label: "CACHE", text: "Redis Jedis pool -> HIT", start: 26, width: 42, ms: "4.6ms", barClass: "cache" },
+        { badge: "badge-http", label: "200 OK", text: "Nginx upstream (app1/app2/app3)", start: 68, width: 32, ms: "11.4ms" }
+      ]
+    },
+    kafka: {
+      status: "200 OK • 8.2ms",
+      node: "upstream: gateway -> kafka-kraft",
+      cache: "cache: TTL 10m",
+      p95: "8.2ms",
+      rps: "840/s",
+      size: "148 B",
+      json: '{ "city": "Kathmandu", "temp": 293.15, "humidity": 64, "audit": "QUEUED" }',
+      steps: [
+        { type: "cmd", text: 'curl "/api/weather?city=Kathmandu"' },
+        { badge: "badge-ok", label: "CLIENT", text: "WebFlux WebClient -> OpenWeather API", start: 0, width: 34, ms: "3.1ms" },
+        { badge: "badge-cache", label: "CACHE", text: "Redis @Cacheable TTL -> stored (10m)", start: 34, width: 22, ms: "1.9ms", barClass: "cache" },
+        { badge: "badge-ok", label: "KAFKA", text: "AuditEvent -> manual_immediate ACK", start: 56, width: 26, ms: "2.1ms", barClass: "warn" },
+        { badge: "badge-http", label: "200 OK", text: "Isolated async side-effect complete", start: 82, width: 18, ms: "8.2ms" }
+      ]
+    },
+    auth: {
+      status: "200 OK • 16.8ms",
+      node: "upstream: auth-svc -> mysql-8",
+      cache: "cookie: HttpOnly",
+      p95: "16.8ms",
+      rps: "620/s",
+      size: "132 B",
+      json: '{ "rotated": true, "expiresIn": "15m", "cookie": "HttpOnly; SameSite=Lax" }',
+      steps: [
+        { type: "cmd", text: "curl -X POST /auth/refresh-token --cookie refreshToken=..." },
+        { badge: "badge-ok", label: "COOKIE", text: "HttpOnly SameSite=Lax token extracted", start: 0, width: 14, ms: "1.2ms" },
+        { badge: "badge-cache", label: "ROTATE", text: "Old DB token revoked -> new issued", start: 14, width: 40, ms: "7.4ms", barClass: "cache" },
+        { badge: "badge-ok", label: "MYSQL", text: "Replay protection verified in DB", start: 54, width: 30, ms: "5.8ms", barClass: "warn" },
+        { badge: "badge-http", label: "200 OK", text: "Set-Cookie: accessToken (15m expiry)", start: 84, width: 16, ms: "16.8ms" }
+      ]
+    }
   };
 
+  let activeTraceKey = "saas";
+  const traceStatusPill = document.getElementById("trace-status-pill");
+  const traceIdLabel = document.getElementById("trace-id-label");
+  const traceNodeLabel = document.getElementById("trace-node-label");
+  const traceCacheLabel = document.getElementById("trace-cache-label");
+  const traceJsonEl = document.getElementById("trace-json");
+  const traceSizeLabel = document.getElementById("trace-size-label");
+  const traceP95El = document.getElementById("trace-p95");
+  const traceRpsEl = document.getElementById("trace-rps");
+  const traceReplayBtn = document.getElementById("trace-replay-btn");
+
+  function randomTraceId() {
+    return Math.random().toString(16).slice(2, 10);
+  }
+
   function renderTrace(key) {
-    if (!terminalBody || !TRACES[key]) return;
+    const trace = TRACES[key];
+    if (!terminalBody || !trace) return;
+    activeTraceKey = key;
+
+    if (traceStatusPill) traceStatusPill.textContent = trace.status;
+    if (traceIdLabel) traceIdLabel.textContent = "trace_id: " + randomTraceId();
+    if (traceNodeLabel) traceNodeLabel.textContent = trace.node;
+    if (traceCacheLabel) traceCacheLabel.textContent = trace.cache;
+    if (traceJsonEl) traceJsonEl.textContent = trace.json;
+    if (traceSizeLabel) traceSizeLabel.textContent = trace.size;
+    if (traceP95El) traceP95El.textContent = trace.p95;
+    if (traceRpsEl) traceRpsEl.textContent = trace.rps;
+
     terminalBody.innerHTML = "";
-    TRACES[key].forEach((row) => {
+    trace.steps.forEach((row) => {
       const div = document.createElement("div");
       if (row.type === "cmd") {
         div.className = "term-line cmd";
@@ -751,15 +805,38 @@
         div.appendChild(document.createTextNode(" " + row.text));
       } else {
         div.className = "term-line step";
+
         const badge = document.createElement("span");
         badge.className = row.badge;
         badge.textContent = row.label;
+
+        const textSpan = document.createElement("span");
+        textSpan.className = "step-text";
+        textSpan.textContent = row.text;
+
+        const track = document.createElement("span");
+        track.className = "span-track";
+        const bar = document.createElement("span");
+        bar.className = "span-bar" + (row.barClass ? " " + row.barClass : "");
+        bar.style.left = row.start + "%";
+        bar.style.width = row.width + "%";
+        track.appendChild(bar);
+
+        const msSpan = document.createElement("span");
+        msSpan.className = "step-ms";
+        msSpan.textContent = row.ms;
+
         div.appendChild(badge);
-        div.appendChild(document.createTextNode(" " + row.text));
+        div.appendChild(textSpan);
+        div.appendChild(track);
+        div.appendChild(msSpan);
       }
       terminalBody.appendChild(div);
     });
   }
+
+  // Render initial trace on page load
+  renderTrace("saas");
 
   document.querySelectorAll(".term-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -772,6 +849,12 @@
       renderTrace(tab.getAttribute("data-trace"));
     });
   });
+
+  if (traceReplayBtn) {
+    traceReplayBtn.addEventListener("click", () => {
+      renderTrace(activeTraceKey);
+    });
+  }
 
   // 10. Project category filtering with pop animation
   const filterBtns = document.querySelectorAll(".filter-btn");

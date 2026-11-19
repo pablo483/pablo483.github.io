@@ -18,7 +18,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261119b" />
+  <link rel="stylesheet" href="styles.css?v=20261119c" />
   <script>
     (function () {
       try {
@@ -167,7 +167,7 @@
           </div>
         </div>
 
-        <!-- Interactive Backend Pipeline Inspector -->
+        <!-- Interactive Backend Telemetry & Request Trace Inspector -->
         <aside class="terminal-card spotlight-card reveal" style="--delay: 120ms"
           aria-label="Interactive Backend Request Trace">
           <div class="terminal-bar">
@@ -177,41 +177,50 @@
               <span class="dot green"></span>
             </div>
             <span class="terminal-title">backend-request-trace.log</span>
+            <div class="terminal-bar-actions">
+              <span class="trace-status-pill" id="trace-status-pill">200 OK &bull; 11.4ms</span>
+              <button type="button" class="trace-replay-btn" id="trace-replay-btn" title="Replay request trace">
+                &#9654; Replay
+              </button>
+            </div>
           </div>
 
           <div class="terminal-tabs" role="tablist" aria-label="Select sample API pipeline">
             <button type="button" class="term-tab active" data-trace="saas" role="tab" aria-selected="true">
-              Inventory SaaS
+              <span class="http-method get">GET</span> Inventory SaaS
             </button>
             <button type="button" class="term-tab" data-trace="kafka" role="tab" aria-selected="false">
-              Kafka + Redis
+              <span class="http-method get">GET</span> Kafka + Redis
             </button>
             <button type="button" class="term-tab" data-trace="auth" role="tab" aria-selected="false">
-              Cookie JWT
+              <span class="http-method post">POST</span> Cookie JWT
             </button>
+          </div>
+
+          <div class="trace-meta-strip">
+            <span id="trace-id-label">trace_id: 7f9a3c1b</span>
+            <span id="trace-node-label">upstream: nginx &rarr; app-2/3</span>
+            <span id="trace-cache-label" class="trace-cache-hit">cache: HIT</span>
           </div>
 
           <div class="terminal-body" id="terminal-body">
-            <div class="term-line cmd">
-              <span class="prompt">$</span> curl -H "X-Tenant-ID: org_nepal" /api/inventory
+            <!-- Populated dynamically by script.js with animated waterfall spans -->
+          </div>
+
+          <div class="trace-response-box">
+            <div class="trace-response-head">
+              <span>RESPONSE PAYLOAD (JSON)</span>
+              <span id="trace-size-label">184 B</span>
             </div>
-            <div class="term-line step">
-              <span class="badge-ok">FILTER</span> TenantInterceptor &rarr; isolated context
-            </div>
-            <div class="term-line step">
-              <span class="badge-ok">LIMIT</span> Bucket4j token bucket &rarr; allowed
-            </div>
-            <div class="term-line step">
-              <span class="badge-cache">CACHE</span> Redis Jedis pool &rarr; HIT
-            </div>
-            <div class="term-line step">
-              <span class="badge-http">200 OK</span> Nginx upstream (app1/app2/app3)
-            </div>
+            <pre class="trace-json" id="trace-json">{ "tenant": "org_nepal", "cache": "HIT", "items": 142, "status": "OK" }</pre>
           </div>
 
           <div class="terminal-footer">
-            <span>Move cursor over window or cards for 3D parallax tilt</span>
-            <span class="live-indicator"><span class="live-ping"></span>Java 17 â€¢ Spring 3.5</span>
+            <div class="telemetry-pills">
+              <span class="telemetry-chip">p95 <strong id="trace-p95">11.4ms</strong></span>
+              <span class="telemetry-chip">RPS <strong id="trace-rps">1,200/s</strong></span>
+            </div>
+            <span class="live-indicator"><span class="live-ping"></span>Java 17 &bull; Spring 3.5</span>
           </div>
         </aside>
       </div>
@@ -592,8 +601,8 @@
     Email copied to clipboard!
   </div>
 
-  <script src="particles.js?v=20261119b"></script>
-  <script src="script.js?v=20261119b"></script>
+  <script src="particles.js?v=20261119c"></script>
+  <script src="script.js?v=20261119c"></script>
 </body>
 
 </html>
