@@ -7,7 +7,7 @@
   "use strict";
 
   const CONFIG = {
-    influence: 165, // px — cursor radius of influence
+    influence: 165, // px â€” cursor radius of influence
     spring: 0.022, // Hooke constant pulling points home
     damping: 0.9, // velocity decay per frame
     pointerLerp: 0.18, // cursor smoothing factor
@@ -27,9 +27,9 @@
 
   const THEMES = {
     dark: {
-      ink: [186, 200, 220], // cool silver-slate dots
-      accent: [56, 189, 248], // #38bdf8 vivid cyan accent
-      line: [56, 189, 248], // luminous cyan tension web
+      ink: [200, 200, 200], // neutral silver dots
+      accent: [0, 255, 65], // #00ff41 electric green accent
+      line: [0, 255, 65], // electric green tension web
       baseAlpha: 0.28,
       maxDotAlpha: 0.96,
       maxLineAlpha: 0.36,
@@ -38,9 +38,9 @@
       pulseAlpha: 0.45
     },
     light: {
-      ink: [30, 41, 59], // #1e293b crisp dark slate
-      accent: [2, 132, 199], // #0284c7 sky accent
-      line: [2, 132, 199], // crisp sky tension web
+      ink: [26, 26, 26], // crisp near-black
+      accent: [0, 184, 48], // #00b830 deep green accent
+      line: [0, 184, 48], // deep green tension web
       baseAlpha: 0.25,
       maxDotAlpha: 0.94,
       maxLineAlpha: 0.3,
